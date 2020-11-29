@@ -1,0 +1,17 @@
+<h2>SEARCH MENU</h2>
+<div class="search">
+  <div *ngFor="let inputblock of inputdata" class="smallbox">
+    {{ inputblock.name }}
+    <br>
+    <input 
+        *ngFor="let field of inputblock.inputs"
+        [id]="inputblock.id+field" 
+        [placeholder]="field" 
+        [(ngModel)]="inputtexts[field]"/>
+    <button  
+        *ngFor="let button of inputblock.buttons"
+        (click)="onClick(inputblock, button)" >
+        {{ button }}
+    </button>
+  </div>
+</div>

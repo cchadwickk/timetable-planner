@@ -1,0 +1,41 @@
+.outer{
+    background-color: #E9C46A;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.column {
+    float: left;
+    width: 50%;
+  }
+  
+/* Clear floats after the columns */
+.row:after {
+content: "";
+display: table;
+clear: both;
+}
+
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 50%;
+}
+
+h1 {
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+    width: 30%;
+    text-align: center;
+}
+
+.contentbox{                    /*wraps content and adds diff background for distinction*/
+    border-style: outset;
+    display: inline-block;
+    background-color: #2a9d8f;
+    padding: 10px;
+    margin: 10px;
+}

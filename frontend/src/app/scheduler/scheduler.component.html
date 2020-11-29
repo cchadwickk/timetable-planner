@@ -1,0 +1,21 @@
+<h2>LOCAL SCHEDULE</h2>
+<div *ngIf="scheduleService.schedules.length">
+    <table>
+        <tr class="thick">
+            <td>
+                SUBJECT
+            </td>
+            <td>
+                COURSE
+            </td>
+        </tr>
+        <tr *ngFor='let schedule of scheduleService.schedules'>    <!--One row for each schedule-->
+            <td>                                                    <!--One column for each value-->
+                {{ schedule.subject }}
+            </td>
+            <td>                                                    <!--One column for each value-->
+                {{ schedule.course }}
+            </td>
+        </tr>
+    </table>
+</div> 
