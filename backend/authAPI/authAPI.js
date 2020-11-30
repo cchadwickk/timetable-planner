@@ -9,6 +9,8 @@ router.get('/logout', controllers.logout);
 
 router.post('/register', controllers.register);
 
-router.post('/changePassword', status.check_login, controllers.changePassword)
+router.post('/changePassword', status.check_login, controllers.changePassword);
+
+router.get('/verifyEmail/:verifystring', controllers.verifyEmail);
 
 module.exports = router

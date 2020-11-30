@@ -1,9 +1,22 @@
 var passport = require('passport');
 var Account = require('../models/account');
+var crypto = require('./crypto');
+const sendmail = require('sendmail')();
+ 
+function emailsender(emailid, string){
+    sendmail({
+        from: 'no-reply@ece9065.tk',
+        to: emailid,
+        subject: 'Verify email for Western Timetable',
+        html: 'Click link to verify: '+process.env.BASE_API_URL+'/auth/verifyEmail/'+string,
+    }, function(err, reply) {
+        console.log(err && err.stack);
+        console.dir(reply);
+    });
+}
 
 function register(req, res) {
     const {email, password, name} = req.body;
-
     if (!/\b\w+\@\w+\.\w+(?:\.\w+)?\b/.test(email)) {
         return res.status(400).send({'message':"Email invalid"})
     } 
@@ -12,11 +25,13 @@ function register(req, res) {
     }
     Account.register(new Account({ email : email, name: name}), password, function(err, account) {
         if (err) {
-            if (err.name == UserExistsError)
+            if (err.name == 'UserExistsError')
                 return res.status(409).send({'message': err.message});
+            console.log(err);
             return res.status(500).json(err)
         }
-        res.status(200).json({'message': "Registered successfully"});
+        emailsender(email, crypto.encrypt(email));
+        res.status(200).json({'message': "Registered successfully, verify email"});
     });
 };
 
@@ -47,4 +62,11 @@ function changePassword(req, res){
     });
 }
 
-module.exports = { register, login , logout, changePassword}
+function verifyEmail(req, res){
+    email = crypto.decrypt(req.params.verifystring);
+    Account.findOneAndUpdate({email: email}, { $set: { email_is_verified: true }} ,function (err, account) {
+        console.log("Email verify query executed");
+    });
+}
+
+module.exports = { register, login , logout, changePassword, verifyEmail }
