@@ -33,4 +33,18 @@ function logout(req, res) {
     res.send({'message':'Logout Successful'});
 }
 
-module.exports = { register, login , logout}
+function changePassword(req, res){
+    const {oldPassword, newPassword} = req.body;
+    if (!newPassword || newPassword.length < 5 || newPassword.length > 20) {
+        return res.status(400).send({'message':"New Password length invalid"})
+    }
+    var user=req.user;
+    user.changePassword(oldPassword, newPassword, function(err){
+        if(err)
+            res.status(400).send({'message': err.message});
+        else
+            res.send({'message':"Password successfully changed"});
+    });
+}
+
+module.exports = { register, login , logout, changePassword}
