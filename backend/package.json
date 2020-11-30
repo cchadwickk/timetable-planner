@@ -17,20 +17,24 @@
   },
   "homepage": "https://github.com/ckadian/ece9065-ckadian-lab3#readme",
   "dependencies": {
+    "await-to-js": "^2.1.1",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "email-verification": "^0.4.6",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "express-winston": "^4.0.5",
     "joi": "^17.3.0",
     "mongodb": "^3.6.2",
     "mongoose": "^5.10.18",
     "nodemailer": "^1.11.0",
     "passport": "^0.4.1",
+    "passport-google-oauth": "^2.0.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
     "sendmail": "^1.6.1",
-    "simple-encryptor": "^4.0.0"
+    "simple-encryptor": "^4.0.0",
+    "winston": "^3.3.3"
   }
 }

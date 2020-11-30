@@ -6,6 +6,10 @@ var openAPI = require('./openAPI/openAPI')
 var authAPI = require('./authAPI/authAPI')
 var Account = require('./models/account')
 var bodyParser = require('body-parser');
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var { strategyOptions, verifyCallback } = require('./authAPI/google');
+var winston = require('winston'),
+    expressWinston = require('express-winston');
 var expressSession = require('express-session')({
   secret: process.env.COOKIE_STRING,
   resave: false,
@@ -22,11 +26,12 @@ app.use(passport.session());
 
 // passport config
 passport.use(Account.createStrategy());
+passport.use(new GoogleStrategy(strategyOptions, verifyCallback))
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 // mongoose
-mongoose.connect(process.env.DB_CONNECTION_STRING);
+mongoose.connect(process.env.DB_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true } );
 
 app.use( (req, res, next) => {
     console.log(Date().toLocaleString()+' '+req.method+' '+decodeURIComponent(req.url) )        //To log hits, with time

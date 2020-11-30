@@ -1,4 +1,3 @@
-var passport = require('passport');
 var Account = require('../models/account');
 var crypto = require('simple-encryptor')(process.env.ENCRYPT_KEY);
 const nodemailer = require('nodemailer');
