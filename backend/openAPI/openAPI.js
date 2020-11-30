@@ -1,8 +1,9 @@
 var express = require('express')
 var router = express.Router()
 const controllers = require('./controllers')
+const status = require('../utilities/statusFunctions')
 
-router.get('/subject',controllers.getSubjects);
+router.get('/subject', status.check_login ,controllers.getSubjects);
 
 router.get('/subject/:scode/course', controllers.getCourses);
 
@@ -18,6 +19,6 @@ router.delete('/schedule/:schcode', controllers.deleteSchedule);
 
 router.delete('/schedule', controllers.deleteAllSchedule);
 
-router.get('/schedule', controllers.getAllSchedule);
+router.get('/schedule', status.check_admin, controllers.getAllSchedule);
 
 module.exports = router
