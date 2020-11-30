@@ -1,6 +1,6 @@
 var passport = require('passport');
 var Account = require('../models/account');
-var crypto = require('./crypto');
+var crypto = require('simple-encryptor')(process.env.ENCRYPT_KEY);
 const sendmail = require('sendmail')();
  
 function emailsender(emailid, string){
@@ -66,8 +66,10 @@ function changePassword(req, res){
 
 function verifyEmail(req, res){
     email = crypto.decrypt(req.params.verifystring);
+    console.log(email);
     Account.findOneAndUpdate({email: email}, { $set: { email_is_verified: true }} ,function (err, account) {
         console.log("Email verify query executed");
+        res.send({"message":"Successfully verified email"});
     });
 }
 
