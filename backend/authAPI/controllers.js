@@ -1,20 +1,30 @@
 var passport = require('passport');
 var Account = require('../models/account');
 var crypto = require('simple-encryptor')(process.env.ENCRYPT_KEY);
-const sendmail = require('sendmail')();
+const nodemailer = require('nodemailer');
  
 function emailsender(emailid, string){
     htmlcontent = 'Click link to verify: '+process.env.BASE_API_URL+'/auth/verifyEmail/'+string;
-    sendmail({
-        from: 'no-reply@ece9065.tk',
-        to: emailid,
-        subject: 'Verify email for Western Timetable',
-        html: htmlcontent,
-    }, function(err, reply) {
-        console.log(err && err.stack);
-        console.dir(reply);
+    let transport = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'himanknoob@gmail.com',
+          pass: process.env.GMAIL_PASSWORD
+        }
     });
-    console.log(htmlcontent);
+    const message = {
+        from: 'himanknoob@gmail.com', // Sender address
+        to: emailid,         // List of recipients
+        subject: 'Verify email for Western Timetable', // Subject line
+        text: htmlcontent // Plain text body
+    };
+    transport.sendMail(message, function(err, info) {
+        if (err) {
+          console.log(err)
+        } else {
+          console.log("Mail sent successfully");
+        }
+    });
 }
 
 function register(req, res) {
