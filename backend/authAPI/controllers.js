@@ -4,15 +4,17 @@ var crypto = require('./crypto');
 const sendmail = require('sendmail')();
  
 function emailsender(emailid, string){
+    htmlcontent = 'Click link to verify: '+process.env.BASE_API_URL+'/auth/verifyEmail/'+string;
     sendmail({
         from: 'no-reply@ece9065.tk',
         to: emailid,
         subject: 'Verify email for Western Timetable',
-        html: 'Click link to verify: '+process.env.BASE_API_URL+'/auth/verifyEmail/'+string,
+        html: htmlcontent,
     }, function(err, reply) {
         console.log(err && err.stack);
         console.dir(reply);
     });
+    console.log(htmlcontent);
 }
 
 function register(req, res) {
