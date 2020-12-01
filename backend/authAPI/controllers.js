@@ -85,6 +85,7 @@ function verifyEmail(req, res){
 function resendEmail(req, res){
     email = req.body.email;
     emailsender(email, crypto.encrypt(email));
+    res.send({"message":"email resent"})
 }
 
 module.exports = { register, login , logout, changePassword, verifyEmail, resendEmail }
