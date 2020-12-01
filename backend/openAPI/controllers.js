@@ -13,7 +13,7 @@ function searchMain(req, res) {
         searchterm['subject']=subject;
     if(course)
         searchterm['catalog_nbr']={ $regex: new RegExp(course,'i') };
-    Course.find(searchterm, { _id:0 })
+    Course.find(searchterm, { _id:0, reviews: { reviewerEmail: 0}})
     .then( result => {
         for(element in result){
             var newReview=[]
@@ -38,8 +38,16 @@ function searchByKeyword(req, res){
             { 'className' : { $regex: new RegExp(keyword,'i') } }
         ] 
     };
-    Course.find(searchterm, { _id:0 })
+    Course.find(searchterm, { _id:0 , reviews: { reviewerEmail: 0} })
     .then( result => {
+        for(element in result){
+            var newReview=[]
+            for(index in result[element].reviews){
+                if(result[element].reviews[index].visible == true)
+                    newReview.push(result[element].reviews[index])
+            };
+            result[element].reviews=newReview;
+        };
         res.send(result);
     });
 }
