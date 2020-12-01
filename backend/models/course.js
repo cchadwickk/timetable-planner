@@ -15,15 +15,15 @@ var TimeTableData = new Schema({
     ssr_component : {type: String},
     enrl_stat : {type: String},
     descr : {type: String}
-})
+}, {_id: false});
 
 var ReviewData = new Schema({
     content: {type: String},
-    visibility: {type: Boolean, default: true},
-    email: {type: String},
-    reviewerName: {tpye: String},
+    reviewerEmail: {type: String},
+    reviewerName: {type: String},
+    visible: {type: Boolean, default: true},
     reviewDate: {type: Date, default: Date.now}
-})
+}, {_id: false});
 
 var Course = new Schema({
     catalog_nbr : {type: String},

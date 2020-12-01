@@ -1,14 +1,7 @@
 var Joi = require('joi')
 var Course = require('../models/course')
 var CourseList = require('../models/courseList')
-
-function checkSpecialChar(str){
-    const regex= RegExp("\\`|\\~|\\!|\\@|\\#|\\$|\\%|\\^|\\&|\\*|\\(|\\)|\\+|\\=|\\[|\\{|\\]|\\}|\\||\\\\|\\'|\\<|\\,|\\.|\\>|\\?|\\/|\\\"|\\;|\\:|\\s");
-    if(regex.test(str))
-        return true;
-    else
-        return false
-}
+var { checkSpecialChar } = require('../utilities/utilities')
 
 function searchMain(req, res) {
     subject = req.body.subject;
@@ -22,6 +15,14 @@ function searchMain(req, res) {
         searchterm['catalog_nbr']={ $regex: new RegExp(course,'i') };
     Course.find(searchterm, { _id:0 })
     .then( result => {
+        for(element in result){
+            var newReview=[]
+            for(index in result[element].reviews){
+                if(result[element].reviews[index].visible == true)
+                    newReview.push(result[element].reviews[index])
+            };
+            result[element].reviews=newReview;
+        };
         res.send(result);
     });
 }
@@ -53,7 +54,7 @@ function searchByKeywordFuzzy(req, res){
     });   
 }
 
-function publicCourses(req, res){
+function publicCourseLists(req, res){
     searchterm = {
         private: false
     }
@@ -261,4 +262,4 @@ function getAllSchedule(req, res) {
     });
 }
 
-module.exports = {searchMain, checkSpecialChar, searchByKeyword, publicCourses, publicCourseTimetable, searchByKeywordFuzzy}
+module.exports = {searchMain, checkSpecialChar, searchByKeyword, publicCourseLists, publicCourseTimetable, searchByKeywordFuzzy}

@@ -1,7 +1,7 @@
 var router = require('express').Router()
 const controllers = require('./controllers')
 var passport = require('passport')
-var status = require('../utilities/statusFunctions')
+var status = require('../utilities/utilities')
 
 router.post('/login', passport.authenticate('local'), controllers.login);
 

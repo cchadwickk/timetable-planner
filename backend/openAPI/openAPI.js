@@ -6,7 +6,7 @@ router.get('/search', controllers.searchMain);
 
 router.get('/searchKeyword', controllers.searchByKeyword);
 
-router.get('/courseLists', controllers.publicCourses)
+router.get('/courseLists', controllers.publicCourseLists)
 
 router.get('/courseListTimetables', controllers.publicCourseTimetable)
 

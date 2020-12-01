@@ -13,4 +13,12 @@ function check_login(req, res, next){
         res.status(401).send({'message':'Must be logged in for this operation'})
 }
 
-module.exports = {check_admin, check_login}
+function checkSpecialChar(str){
+    const regex= RegExp("\\`|\\~|\\!|\\@|\\#|\\$|\\%|\\^|\\&|\\*|\\(|\\)|\\+|\\=|\\[|\\{|\\]|\\}|\\||\\\\|\\'|\\<|\\,|\\.|\\>|\\?|\\/|\\\"|\\;|\\:");
+    if(regex.test(str))
+        return true;
+    else
+        return false
+}
+
+module.exports = {check_admin, check_login, checkSpecialChar}
