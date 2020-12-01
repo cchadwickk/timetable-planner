@@ -8,8 +8,6 @@ var Account = require('./models/account')
 var bodyParser = require('body-parser');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var { strategyOptions, verifyCallback } = require('./authAPI/google');
-var winston = require('winston'),
-    expressWinston = require('express-winston');
 var expressSession = require('express-session')({
   secret: process.env.COOKIE_STRING,
   resave: false,

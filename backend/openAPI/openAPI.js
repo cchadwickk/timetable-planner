@@ -1,24 +1,13 @@
 var express = require('express')
 var router = express.Router()
 const controllers = require('./controllers')
-const status = require('../utilities/statusFunctions')
 
-router.get('/subject', status.check_login ,controllers.getSubjects);
+router.get('/search', controllers.searchMain);
 
-router.get('/subject/:scode/course', controllers.getCourses);
+router.get('/searchKeyword', controllers.searchByKeyword);
 
-router.get('/subject/:scode/course/:ccode/timetable/:compcode?', controllers.getTimetables);
+router.get('/courseLists', controllers.publicCourses)
 
-router.post('/schedule/:schcode/', controllers.createSchedule);
-
-router.put('/schedule/:schcode/scheduledata', controllers.updateSchedule);
-
-router.get('/schedule/:schcode/scheduledata', controllers.getScheduleData);
-
-router.delete('/schedule/:schcode', controllers.deleteSchedule);
-
-router.delete('/schedule', controllers.deleteAllSchedule);
-
-router.get('/schedule', status.check_admin, controllers.getAllSchedule);
+router.get('/courseListTimetables', controllers.publicCourseTimetable)
 
 module.exports = router

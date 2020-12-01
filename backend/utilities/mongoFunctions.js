@@ -1,8 +1,8 @@
 var MongoClient = require('mongodb').MongoClient;
 var MongoUrl = "mongodb://admin:ece9065@lab2.ece9065.tk:27017/ece9065_project?authSource=admin";
 
-const Timetable = "course_data"
-const Schedule = "course_lists"
+const Timetable = "courses"
+const Schedule = "courseLists"
 
 async function Find(collection, query, projection){
     const client = await MongoClient.connect(MongoUrl)

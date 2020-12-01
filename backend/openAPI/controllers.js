@@ -1,8 +1,6 @@
 var Joi = require('joi')
-const mango = require('../utilities/mongoFunctions')
-const controllers = require('./controllers')
-var TimetableCollection = mango.Timetable
-var ScheduleCollection = mango.Schedule
+var Course = require('../models/course')
+var CourseList = require('../models/courseList')
 
 function checkSpecialChar(str){
     const regex= RegExp("\\`|\\~|\\!|\\@|\\#|\\$|\\%|\\^|\\&|\\*|\\(|\\)|\\+|\\=|\\[|\\{|\\]|\\}|\\||\\\\|\\'|\\<|\\,|\\.|\\>|\\?|\\/|\\\"|\\;|\\:|\\s");
@@ -12,13 +10,84 @@ function checkSpecialChar(str){
         return false
 }
 
-function getSubjects(req, res) {
-    mango.Find(TimetableCollection, {}, { subject:1, className:1, _id:0 })
+function searchMain(req, res) {
+    subject = req.body.subject;
+    course = req.body.course;
+    searchterm = {};
+    if( (!subject&&!course) || checkSpecialChar(subject) || checkSpecialChar(course))
+        return res.status(400).send({"message":"Invalid data in subject or course, or empty"})
+    if(subject)
+        searchterm['subject']=subject;
+    if(course)
+        searchterm['catalog_nbr']={ $regex: new RegExp(course,'i') };
+    Course.find(searchterm, { _id:0 })
     .then( result => {
-        result = result.map(elm => ({ "Subject Code": elm.subject, Description: elm.className}));
-        res.send(result)
+        res.send(result);
     });
 }
+
+function searchByKeyword(req, res){
+    keyword = req.body.keyword;
+    if(!keyword || checkSpecialChar(keyword))
+        return res.status(400).send({"message":"Invalid data in keyword, or empty"})
+    searchterm = {
+        $or: 
+        [
+            { 'catalog_nbr' : { $regex: new RegExp(keyword,'i') } },
+            { 'className' : { $regex: new RegExp(keyword,'i') } }
+        ] 
+    };
+    Course.find(searchterm, { _id:0 })
+    .then( result => {
+        res.send(result);
+    });
+}
+
+function searchByKeywordFuzzy(req, res){
+    keyword = req.body.keyword;
+    if(!keyword || checkSpecialChar(keyword))
+        return res.status(400).send({"message":"Invalid data in keyword, or empty"})
+    Course.fuzzySearch(keyword)
+    .then( result => {
+        res.send(result);
+    });   
+}
+
+function publicCourses(req, res){
+    searchterm = {
+        private: false
+    }
+    CourseList.find(searchterm, { _id:0 , creatorEmail: 0, private: 0 } )
+    .then( result => {
+        res.send(result);
+    });
+}
+
+function publicCourseTimetable(req, res){
+    courseListName = req.body.courseListName;
+    if(!courseListName || checkSpecialChar(courseListName))
+        return res.status(400).send({"message":"Invalid data in courseListName, or empty"});
+    searchterm = { courseListName: courseListName , private: false};
+    CourseList.find(searchterm, { listData: 1 })            //Get the courselist for the request
+    .then( result => {
+        searchterm = [];
+        if(result.length == 0)
+            return res.send({"message": "No public courseList by that name"})
+        result[0].listData.forEach(element => {             //Iterate over the list to form a search document
+            searchterm.push({ 
+                'subject':element.subject,
+                'catalog_nbr': element.course
+            });
+        });
+        searchterm = { $or: searchterm };                   //Search mongo for documents that match
+        Course.find(searchterm, { 'subject': 1, 'catalog_nbr': 1, 'course_info': 1, _id:0 })
+        .then( result2 => {
+            res.send(result2);
+        });
+    });
+}
+
+
 
 function getCourses(req, res) {
     const SubjectCode = req.params.scode;
@@ -192,4 +261,4 @@ function getAllSchedule(req, res) {
     });
 }
 
-module.exports = {checkSpecialChar, getAllSchedule, deleteAllSchedule, deleteSchedule, getScheduleData, updateSchedule, createSchedule, getTimetables, getCourses, getSubjects}
+module.exports = {searchMain, checkSpecialChar, searchByKeyword, publicCourses, publicCourseTimetable, searchByKeywordFuzzy}
