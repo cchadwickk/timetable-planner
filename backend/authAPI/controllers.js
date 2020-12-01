@@ -82,4 +82,9 @@ function verifyEmail(req, res){
     });
 }
 
-module.exports = { register, login , logout, changePassword, verifyEmail }
+function resendEmail(req, res){
+    email = req.body.email;
+    emailsender(email, crypto.encrypt(email));
+}
+
+module.exports = { register, login , logout, changePassword, verifyEmail, resendEmail }

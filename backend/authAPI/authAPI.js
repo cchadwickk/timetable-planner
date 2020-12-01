@@ -13,6 +13,8 @@ router.post('/changePassword', status.check_login, controllers.changePassword);
 
 router.get('/verifyEmail/:verifystring', controllers.verifyEmail);
 
+router.get('/resendEmail', controllers.resendEmail);
+
 router.get('/google',
     passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email'] }));
 
