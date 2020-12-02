@@ -36,7 +36,27 @@ function getReviews(req, res){
 }
 
 function updateReview(req, res){
+    var { email, subject, course, visible } = req.body;
 
+    if( (!email||!subject||!course) || checkSpecialChar(subject) || checkSpecialChar(course) )
+        return res.status(400).send({"message":"Invalid data/empty : email or or subject or course"});
+    
+    searchObj ={ subject: subject, catalog_nbr: course, reviews: { $elemMatch: { reviewerEmail: email } } };
+    Course.find(searchObj).then(result => {
+        if(result.length == 0)
+            res.status(400).send({"message":"No review found for that combination of params"});
+        else{
+            newReviews = []
+            result[0].reviews.forEach(element => {
+                if(element.reviewerEmail == email)
+                    element.visible = visible;
+                newReviews.push(element)
+            });
+            Course.updateOne( searchObj, { reviews: newReviews } ).then(result => {
+                res.send({"message":"Changed review visibility"});
+            });
+        }
+    });
 }
 
 module.exports = { getUsers, updateUser, getReviews, updateReview}
