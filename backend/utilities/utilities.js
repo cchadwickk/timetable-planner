@@ -21,4 +21,9 @@ function checkSpecialChar(str){
         return false
 }
 
-module.exports = {check_admin, check_login, checkSpecialChar}
+function customLogger(req, res, next){
+    console.log(Date().toLocaleString()+' '+req.method+' '+decodeURIComponent(req.url) )        //To log hits, with time
+    next();
+}
+
+module.exports = {check_admin, check_login, checkSpecialChar, customLogger}
