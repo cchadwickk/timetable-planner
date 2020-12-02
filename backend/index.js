@@ -4,6 +4,7 @@ var passport = require('passport')
 require("dotenv").config()
 var openAPI = require('./openAPI/openAPI')
 var secureAPI = require('./secureAPI/secureAPI')
+var adminAPI = require('./adminAPI/adminAPI')
 var authAPI = require('./authAPI/authAPI')
 var Account = require('./models/account')
 var bodyParser = require('body-parser');
@@ -39,6 +40,7 @@ app.use( (req, res, next) => {
 app.use('/api/open', openAPI)
 app.use('/api/auth', authAPI)
 app.use('/api/secure', secureAPI)
+app.use('/api/admin', adminAPI)
 
 const port = process.env.PORT || 3000;
 app.listen(port, ()=> console.log(`Listening on ${port}...`))

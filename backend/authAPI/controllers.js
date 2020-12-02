@@ -77,7 +77,7 @@ function verifyEmail(req, res){
     email = crypto.decrypt(req.params.verifystring);
     console.log(email);
     Account.findOneAndUpdate({email: email}, { $set: { email_is_verified: true }} ,function (err, account) {
-        console.log("Email verify query executed");
+        console.log(email+" email verified");
         res.send({"message":"Successfully verified email"});
     });
 }

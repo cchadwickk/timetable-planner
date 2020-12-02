@@ -7,7 +7,6 @@ var Account = new Schema({
     password: String,
     name: String,
     email_is_verified: {type: Boolean, default: false},
-    courseListCount: {type: Number, default: 0},
     googleId: {type: String, default: ''},
     active: {type: Boolean, default: true},
     course_list_count: {type: Number, default: 0},

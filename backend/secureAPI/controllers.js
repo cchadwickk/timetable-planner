@@ -29,10 +29,9 @@ function createCourseList(req, res){
             insertObj['courseListName']= courseListName;
             insertObj['creatorEmail']= req.user.email;
             insertObj['creatorName']=req.user.name;
-            console.log(insertObj);
             CourseList.create(insertObj).then(result => {
                 req.user.course_list_count += 1;
-                Account.updateOne({email: req.user.email}, {course_list_count: req.user.course_list_count});
+                Account.updateOne({email: req.user.email}, {course_list_count: req.user.course_list_count}).exec();
                 return res.send({"message": "courseList inserted successfully"});
             });
         }
