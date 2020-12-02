@@ -10,7 +10,7 @@ function getUsers(req, res){
 
 function updateUser(req, res){
     var { email, admin } = req.body;
-    if( (!email||!admin) || checkSpecialChar(email))
+    if(!email||!admin)
         return res.status(400).send({"message":"Invalid data/empty : email or admin"});
     
     searchObj = {email: email};
