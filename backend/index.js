@@ -28,7 +28,7 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 // mongoose
-mongoose.connect(process.env.DB_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true } ).then(result => {
+mongoose.connect(process.env.DB_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true , useCreateIndex: true} ).then(result => {
   var conn = result.connections[0];
   if(conn._readyState)
     console.log("\n############# Mongoose successfully connected to "+conn.host+":"+conn.port+"/"+conn.name+" #########\n\n\n\n");
