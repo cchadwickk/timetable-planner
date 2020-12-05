@@ -4,10 +4,10 @@ const controllers = require('./controllers')
 
 router.get('/search', controllers.searchMain);
 
-router.get('/searchKeyword', controllers.searchByKeyword);
+router.get('/searchKeyword/:keyword', controllers.searchByKeyword);
 
 router.get('/courseLists', controllers.publicCourseLists)
 
-router.get('/courseListTimetables', controllers.publicCourseTimetable)
+router.get('/courseListTimetables/:courseListName', controllers.publicCourseTimetable)
 
 module.exports = router

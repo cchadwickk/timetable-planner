@@ -39,7 +39,7 @@ function createCourseList(req, res){
 }
 
 function deleteCourseList(req, res){
-    var { courseListName } = req.body;
+    var { courseListName } = req.params;
     if(!courseListName || checkSpecialChar(courseListName))
         return res.status(400).send({"message":"Invalid data/empty : courseListName"});
     searchObj = { courseListName: courseListName };
@@ -64,7 +64,7 @@ function getCourseLists(req, res){
 }
 
 function privateCourseTimetable(req, res){
-    courseListName = req.body.courseListName;
+    courseListName = req.params.courseListName;
     if(!courseListName || checkSpecialChar(courseListName))
         return res.status(400).send({"message":"Invalid data in courseListName, or empty"});
     searchterm = { courseListName: courseListName, creatorEmail: req.user.email };

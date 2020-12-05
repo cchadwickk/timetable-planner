@@ -7,11 +7,11 @@ router.use(check_login);
 
 router.put('/courseList', controllers.createCourseList);
 
-router.delete('/courseList', controllers.deleteCourseList);
+router.delete('/courseList/:courseListName', controllers.deleteCourseList);
 
 router.get('/courseList', controllers.getCourseLists);
 
-router.get('/courseListTimetables', controllers.privateCourseTimetable);
+router.get('/courseListTimetables/:courseListName', controllers.privateCourseTimetable);
 
 router.put('/courseReview', controllers.addReview);
 

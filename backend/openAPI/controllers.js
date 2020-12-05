@@ -4,11 +4,10 @@ var CourseList = require('../models/courseList')
 var { checkSpecialChar } = require('../utilities/utilities')
 
 function searchMain(req, res) {
-    subject = req.body.subject;
-    course = req.body.course;
+    var { subject, course } = req.query;
     searchterm = {};
     if( (!subject&&!course) || checkSpecialChar(subject) || checkSpecialChar(course))
-        return res.status(400).send({"message":"Invalid data in subject or course, or empty"})
+        return res.status(400).send({"message":"Invalid data in subject or course, or both empty"})
     if(subject)
         searchterm['subject']=subject;
     if(course)
@@ -28,7 +27,7 @@ function searchMain(req, res) {
 }
 
 function searchByKeyword(req, res){
-    keyword = req.body.keyword;
+    keyword = req.params.keyword;
     if(!keyword || checkSpecialChar(keyword))
         return res.status(400).send({"message":"Invalid data in keyword, or empty"})
     searchterm = {
@@ -53,7 +52,7 @@ function searchByKeyword(req, res){
 }
 
 function searchByKeywordFuzzy(req, res){
-    keyword = req.body.keyword;
+    keyword = req.params.keyword;
     if(!keyword || checkSpecialChar(keyword))
         return res.status(400).send({"message":"Invalid data in keyword, or empty"})
     Course.fuzzySearch(keyword)
@@ -73,7 +72,7 @@ function publicCourseLists(req, res){
 }
 
 function publicCourseTimetable(req, res){
-    courseListName = req.body.courseListName;
+    courseListName = req.params.courseListName;
     if(!courseListName || checkSpecialChar(courseListName))
         return res.status(400).send({"message":"Invalid data in courseListName, or empty"});
     searchterm = { courseListName: courseListName , private: false};
