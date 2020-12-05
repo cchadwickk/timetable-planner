@@ -3,7 +3,7 @@ var crypto = require('simple-encryptor')(process.env.ENCRYPT_KEY);
 const nodemailer = require('nodemailer');
  
 function emailsender(emailid, string){
-    htmlcontent = 'Click link to verify: '+process.env.BASE_API_URL+'/auth/verifyEmail/'+string;
+    htmlcontent = 'Click link to verify: '+process.env.BASE_API_URL+'/auth/verifyEmail/'+encodeURIComponent(string);
     let transport = nodemailer.createTransport({
         service: 'gmail',
         auth: {
