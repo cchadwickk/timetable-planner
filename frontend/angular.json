@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "western-timetable": {
+    "timetable": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/western-timetable",
+            "outputPath": "dist/timetable",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -61,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "western-timetable:build"
+            "browserTarget": "timetable:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "western-timetable:build:production"
+              "browserTarget": "timetable:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "western-timetable:build"
+            "browserTarget": "timetable:build"
           }
         },
         "test": {
@@ -109,16 +109,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "western-timetable:serve"
+            "devServerTarget": "timetable:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "western-timetable:serve:production"
+              "devServerTarget": "timetable:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "western-timetable"
+  "defaultProject": "timetable"
 }

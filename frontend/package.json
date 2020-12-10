@@ -1,5 +1,5 @@
 {
-  "name": "western-timetable",
+  "name": "timetable",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

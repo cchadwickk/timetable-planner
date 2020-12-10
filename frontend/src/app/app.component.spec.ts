@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'western-timetable'`, () => {
+  it(`should have as title 'timetable'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('western-timetable');
+    expect(app.title).toEqual('timetable');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('western-timetable app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('timetable app is running!');
   });
 });
