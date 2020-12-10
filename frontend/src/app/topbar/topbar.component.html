@@ -1,1 +1,12 @@
-<p>topbar works!</p>
+<h1>{{title}}</h1>
+<div>
+    <label>Email:
+      <input [(ngModel)]="email" placeholder="Email"/>
+    </label>
+    <label>Password:
+        <input [(ngModel)]="password" placeholder="Password" type="password"/>
+    </label>
+    <button
+    (click)="login()" >Login
+    </button>
+</div>

@@ -51,7 +51,7 @@ function login(req, res) {
         req.logout();
         return res.status(401).send({'message':'Email not verified, cannot login'})
     }
-    res.send({'message':'Login Successful'});
+    res.send({'message':'Login Successful', 'name':req.user.name, 'email': req.user.email, 'admin': req.user.admin});
 }
 
 function logout(req, res) {
