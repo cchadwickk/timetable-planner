@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-topbar',
@@ -12,9 +13,21 @@ export class TopbarComponent implements OnInit {
   email: string;
   password: string;
 
-  constructor() { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.checkLogin();
   }
 
+  login(): void {
+    this.authService.login(this.email, this.password).subscribe(res => {
+      console.log("Logged in");
+    });
+  }
+
+  logout(): void {
+    this.authService.logout().subscribe(res => {
+      console.log("Logged out");
+    })
+  }
 }

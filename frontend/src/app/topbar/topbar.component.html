@@ -1,5 +1,5 @@
 <h1>{{title}}</h1>
-<div>
+<div *ngIf="authService.loggedIn==false">
     <label>Email:
       <input [(ngModel)]="email" placeholder="Email"/>
     </label>
@@ -8,5 +8,12 @@
     </label>
     <button
     (click)="login()" >Login
+    </button>
+    <input type="button" onclick="window.location.href='https://project.ece9065.tk/api/auth/google';" value="Google" />
+</div>
+<div *ngIf="authService.loggedIn==true">
+    Hello {{authService.user.name}}
+    <button
+    (click)="logout()" >Logout
     </button>
 </div>
