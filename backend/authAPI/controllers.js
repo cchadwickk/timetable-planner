@@ -54,7 +54,7 @@ function login(req, res) {
     res.send({'message':'Login Successful', 'name':req.user.name, 'email': req.user.email, 'admin': req.user.admin});
 }
 
-function login(req, res) {
+function getProfile(req, res) {
     if(req.user.email_is_verified == false){
         req.logout();
         return res.status(401).send({'message':'Email not verified, cannot login'})
@@ -96,4 +96,4 @@ function resendEmail(req, res){
     res.send({"message":"email resent"})
 }
 
-module.exports = { register, login , logout, changePassword, verifyEmail, resendEmail }
+module.exports = { getProfile, register, login , logout, changePassword, verifyEmail, resendEmail }
