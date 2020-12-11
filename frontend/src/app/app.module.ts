@@ -8,13 +8,15 @@ import { TopbarComponent } from './topbar/topbar.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SecureViewComponent } from './secure-view/secure-view.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopbarComponent,
     AlertsComponent,
-    SecureViewComponent
+    SecureViewComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

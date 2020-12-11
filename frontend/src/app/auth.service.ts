@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { env } from '../environments/environment'
 import { map, catchError, tap } from 'rxjs/operators';
 import { LooseObject } from './object-template';
@@ -88,16 +88,5 @@ export class AuthService {
         this.setData(res.email, res.admin, res.name);
         this.alertService.add("Logged in successfully")
       });
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-  
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-  
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
   }
 }

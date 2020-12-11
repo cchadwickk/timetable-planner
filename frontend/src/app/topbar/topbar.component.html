@@ -9,7 +9,10 @@
     <button
     (click)="login()" >Login
     </button>
-    <input type="button" onclick="window.location.href='https://project.ece9065.tk/api/auth/google';" value="Google" />
+    <button routerLink="/register">
+        Register
+    </button>
+    <input type="button" onclick="window.location.href='api/auth/google';" value="Google" />
 </div>
 <div *ngIf="authService.loggedIn==true">
     Hello {{authService.user.name}}
