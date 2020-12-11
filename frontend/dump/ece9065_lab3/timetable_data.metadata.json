@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"fd13cd0303c6498cac3cf54c70ae5b9b","collectionName":"timetable_data"}

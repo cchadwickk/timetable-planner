@@ -12,6 +12,7 @@ import { RegisterComponent } from './register/register.component';
 import { AboutComponent } from './about/about.component';
 import { AdminComponent } from './admin/admin.component';
 import { GuestComponent } from './guest/guest.component';
+import { ArrayToTableComponent } from './array-to-table/array-to-table.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { GuestComponent } from './guest/guest.component';
     RegisterComponent,
     AboutComponent,
     AdminComponent,
-    GuestComponent
+    GuestComponent,
+    ArrayToTableComponent
   ],
   imports: [
     BrowserModule,

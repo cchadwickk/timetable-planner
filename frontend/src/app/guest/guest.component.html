@@ -1,1 +1,21 @@
-<p>guest works!</p>
+<br><br>
+<div>
+    <label>Subject:
+        <input [(ngModel)]="subject" placeholder="Subject"/>
+    </label>
+    <label>Course:
+        <input [(ngModel)]="course" placeholder="Course"/>
+    </label>
+    <button (click)="mainSearch()" >
+        Search
+    </button>
+</div>
+<div>
+    <label>Keyword:
+            <input [(ngModel)]="keyword" placeholder="Keyword"/>
+    </label>
+    <button (click)="keywordSearch()">
+        Search
+    </button>
+</div>
+<app-array-to-table [data]=openService.searchResults [header]=resultHeader [keysFilter]=resultFilter></app-array-to-table>
