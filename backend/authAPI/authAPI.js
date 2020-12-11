@@ -15,7 +15,7 @@ router.get('/verifyEmail/:verifystring', controllers.verifyEmail);
 
 router.post('/resendEmail', controllers.resendEmail);
 
-router.get('/profile', controllers.getProfile);
+router.get('/profile', status.check_login, controllers.getProfile);
 
 router.get('/google',
     passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email'] }));
