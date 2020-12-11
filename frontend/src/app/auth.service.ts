@@ -47,6 +47,19 @@ export class AuthService {
     );
   }
 
+  resendEmail(email: string): Observable<Boolean> {
+    let apiPath = this.baseUrl+'/resendEmail';
+    let body = {
+      email: email
+    }
+    return this.http.post<LooseObject>(apiPath, body, this.httpOptions).pipe(
+      map(res => {
+        this.alertService.add("Verification email resent.")
+        return true;
+      })
+    );
+  }
+
   checkLogin(): void{
     this.user = JSON.parse(localStorage.getItem('user'));
     if(this.user==null)

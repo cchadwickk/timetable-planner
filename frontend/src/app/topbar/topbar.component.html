@@ -1,5 +1,15 @@
 <h1>{{title}}</h1>
-<div *ngIf="authService.loggedIn==false">
+<button routerLink="/about">About</button>
+<span *ngIf="authService.loggedIn==false">
+    <button routerLink="/guest">Guest </button>
+</span>
+<span *ngIf="authService.loggedIn==true">
+    <button routerLink="/secure">Secure </button>
+    <span *ngIf="authService.user.admin==true">
+        <button routerLink="/admin">Admin </button>
+    </span>
+</span>
+<span *ngIf="authService.loggedIn==false" class="alignRight">
     <label>Email:
       <input [(ngModel)]="email" placeholder="Email"/>
     </label>
@@ -13,10 +23,10 @@
         Register
     </button>
     <input type="button" onclick="window.location.href='api/auth/google';" value="Google" />
-</div>
-<div *ngIf="authService.loggedIn==true">
+</span>
+<span *ngIf="authService.loggedIn==true" class="alignRight">
     Hello {{authService.user.name}}
     <button
     (click)="logout()" >Logout
     </button>
-</div>
+</span>

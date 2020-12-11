@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { AlertService } from '../alert.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-topbar',
@@ -14,7 +15,7 @@ export class TopbarComponent implements OnInit {
   email: string;
   password: string;
 
-  constructor(public authService: AuthService, private alertService: AlertService) { }
+  constructor(public authService: AuthService, private alertService: AlertService, private router: Router) { }
 
   ngOnInit(): void {
     this.authService.checkLogin();                //On each render, check if localstorage has user
@@ -24,10 +25,17 @@ export class TopbarComponent implements OnInit {
     this.authService.login(this.email, this.password).subscribe(res => {
       console.log("Logged in");
     },err=>  {
-      if(err.status==401)
-        this.alertService.add("Wrong email and password");
-      if(err.error.message)
+      if((err.error.message)&&(err.error.message.includes("Email not verified"))){
+        let inp = confirm("Email has not been verfied. Resend verification email ?");
+        if(inp){
+          this.authService.resendEmail(this.email).subscribe();
+        }
+      }
+      else if(err.error.message)
         this.alertService.add(err.error.message);
+      else if(err.status==401)
+        this.alertService.add("Wrong email and password");
+      this.password="";
     });
   }
 

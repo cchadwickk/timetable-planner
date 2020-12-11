@@ -9,6 +9,9 @@ import { AlertsComponent } from './alerts/alerts.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SecureViewComponent } from './secure-view/secure-view.component';
 import { RegisterComponent } from './register/register.component';
+import { AboutComponent } from './about/about.component';
+import { AdminComponent } from './admin/admin.component';
+import { GuestComponent } from './guest/guest.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { RegisterComponent } from './register/register.component';
     TopbarComponent,
     AlertsComponent,
     SecureViewComponent,
-    RegisterComponent
+    RegisterComponent,
+    AboutComponent,
+    AdminComponent,
+    GuestComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,6 @@ export class AlertService {
     this.message=message;
     setTimeout(() =>{
       this.message="";
-    }, 3000);
+    }, 5000);
   }
 }
