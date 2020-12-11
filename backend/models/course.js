@@ -14,7 +14,6 @@ var Course = new Schema({
     catalog_nbr : {type: String},
 	subject : {type: String},
 	className : {type: String},
-    course_info: [TimeTableData],
     catalog_description: {type: String},
     reviews: [ReviewData],
 
