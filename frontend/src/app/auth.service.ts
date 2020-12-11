@@ -22,6 +22,16 @@ export class AuthService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  setData(email: string, admin: string, name: string): void{
+    this.loggedIn=true;
+    this.user = { 
+      email: email,
+      admin: admin,
+      name: name
+    }
+    localStorage.setItem('user', JSON.stringify(this.user))
+  }
+
   login(email: string, password: string): Observable<Boolean> {
     let apiPath = this.baseUrl+'/login';
     let body = {
@@ -30,13 +40,7 @@ export class AuthService {
     }
     return this.http.post<LooseObject>(apiPath, body, this.httpOptions).pipe(
       map(res => {
-        this.loggedIn=true;
-        this.user = { 
-          email: res.email,
-          admin:res.admin,
-          name:res.name
-        }
-        localStorage.setItem('user', JSON.stringify(this.user))
+        this.setData(res.email, res.admin, res.name);
         this.alertService.add("Logged in successfully")
         return true;
       })
@@ -76,6 +80,14 @@ export class AuthService {
           this.alertService.add(res.message);
       })
     );
+  }
+
+  setProfile(): void{
+    let apiPath = this.baseUrl+'/profile';
+    this.http.get<LooseObject>(apiPath, this.httpOptions).subscribe(res =>{
+        this.setData(res.email, res.admin, res.name);
+        this.alertService.add("Logged in successfully")
+      });
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

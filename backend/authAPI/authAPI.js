@@ -15,11 +15,13 @@ router.get('/verifyEmail/:verifystring', controllers.verifyEmail);
 
 router.post('/resendEmail', controllers.resendEmail);
 
+router.get('/profile', controllers.getProfile);
+
 router.get('/google',
     passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email'] }));
 
 router.get('/google/callback', 
-    passport.authenticate('google', { failureRedirect: '/login' }),
+    passport.authenticate('google', { successRedirect: '/secure-view'}),
     function(req, res) {
         //res.redirect('/');
         res.send({"message":"Google login/registration successful"})

@@ -6,17 +6,21 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { TopbarComponent } from './topbar/topbar.component';
 import { AlertsComponent } from './alerts/alerts.component';
+import { AppRoutingModule } from './app-routing.module';
+import { SecureViewComponent } from './secure-view/secure-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopbarComponent,
-    AlertsComponent
+    AlertsComponent,
+    SecureViewComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
