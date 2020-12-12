@@ -88,7 +88,7 @@ function publicCourseTimetable(req, res){
             });
         });
         searchterm = { $or: searchterm };                   //Search mongo for documents that match
-        Course.find(searchterm, { 'subject': 1, 'catalog_nbr': 1, 'course_info': 1, _id:0 })
+        Course.find(searchterm, { reviews:0, _id:0 })
         .then( result2 => {
             res.send(result2);
         });

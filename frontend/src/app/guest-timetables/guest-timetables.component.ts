@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { OpenService } from '../open.service';
 
 @Component({
@@ -20,8 +19,7 @@ export class GuestTimetablesComponent implements OnInit {
 
   constructor(  
     private route: ActivatedRoute,
-    public openService: OpenService,
-    private location: Location) { }
+    public openService: OpenService) { }
 
   ngOnInit(): void {
     this.getCourseListName();
