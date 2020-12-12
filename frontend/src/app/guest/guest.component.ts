@@ -31,11 +31,13 @@ export class GuestComponent implements OnInit {
     'ExpandHeading':"SUBJECT COURSE COMBINATIONS",
     'ExpandColumn':"listData",
     'ExpandKey':"course",
-    'infoButton':{
+    'buttons':[{
       'heading': "TIMETABLES",
       'text': "Get",
-      'route': "/guest-timetables/|$courseListName"
-    }}
+      'path': "/guest-timetables/|$courseListName",
+      'type': "router",
+      'position': "main"
+    }]}
 
   constructor(public openService: OpenService, private alertService: AlertService, private router: Router) { }
 

@@ -1,19 +1,29 @@
 <div *ngIf="data.length">
         <p-table [value]="data" [dataKey]="[uniqueKey]">
+
             <ng-template pTemplate="caption">
                     {{heading}}
             </ng-template>
+
             <ng-template pTemplate="header">
                 <tr>
                     <th></th>
                     <th *ngFor="let heads of filteredKeys()">
                         {{heads.toUpperCase()}}
                     </th>
-                    <th *ngIf="infoButton">
-                        {{ infoButton.heading }}
-                    </th>
+                    <ng-container *ngIf="getButtons('main','router').length">
+                        <th *ngFor="let mainRouterButtons of getButtons('main','router')">
+                            {{ mainRouterButtons.heading }}
+                        </th>
+                    </ng-container>
+                    <ng-container *ngIf="getButtons('main','action').length">
+                        <th *ngFor="let mainActionButtons of getButtons('main','action')">
+                            {{ mainActionButtons.heading }}
+                        </th>
+                    </ng-container>
                 </tr>
             </ng-template>
+
             <ng-template pTemplate="body" let-rowData let-expanded="expanded">
                 <tr>
                     <td>
@@ -22,18 +32,29 @@
                     <td *ngFor="let heads of filteredKeys()">
                         {{rowData[heads]}}
                     </td>
-                    <td *ngIf="infoButton">
-                        <button [routerLink]="generateLink(rowData)">{{infoButton.text}}</button>
-                    </td>
+                    <ng-container *ngIf="getButtons('main','router').length">
+                        <td *ngFor="let mainRouterButton of getButtons('main','router')">
+                            <button [routerLink]="generateLink(rowData, mainRouterButton)">{{ mainRouterButton.text }}</button>
+                        </td>
+                    </ng-container>
+                    <ng-container *ngIf="getButtons('main','action').length">
+                        <td *ngFor="let mainActionButton of getButtons('main','action')">
+                            <button (click)="generateLink(rowData, mainActionButton)">{{ mainActionButton.text }}</button>
+                        </td>
+                    </ng-container>
                 </tr>
             </ng-template>
+
             <ng-template pTemplate="rowexpansion" let-rowData>
+
                 <tr *ngIf="remainingKeys().length">
                     <td [attr.colspan]="filterKeyLength()">
                         <p-table [value]="[rowData]" [dataKey]="[uniqueKey]">
+
                             <ng-template pTemplate="caption">
                                     REMAINING INFORMATION
                             </ng-template>
+
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th *ngFor="let heads of remainingKeys()">
@@ -41,6 +62,7 @@
                                     </th>
                                 </tr>
                             </ng-template>
+
                             <ng-template pTemplate="body" let-rowData>
                                 <tr>
                                     <td *ngFor="let heads of remainingKeys()">
@@ -48,32 +70,59 @@
                                     </td>
                                 </tr>
                             </ng-template>
+
                         </p-table>
                     </td>
                 </tr>
+
                 <tr *ngIf="rowData[expandColumn] && rowData[expandColumn].length">
                     <td [attr.colspan]="filterKeyLength()">
                         <p-table [value]="rowData[expandColumn]" [dataKey]="[expandKey]">
+                            
                             <ng-template pTemplate="caption">
                                 {{expandHeading}}
                             </ng-template>
+                            
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th *ngFor="let item of rowData[expandColumn][0] | keyvalue">
                                         {{item.key.toUpperCase()}}
                                     </th>
+                                    <ng-container *ngIf="getButtons('inside','router').length">
+                                        <th *ngFor="let insideRouterButtons of getButtons('inside','router')">
+                                            {{ insideRouterButtons.heading }}
+                                        </th>
+                                    </ng-container>
+                                    <ng-container *ngIf="getButtons('inside','action').length">
+                                        <th *ngFor="let insideActionButtons of getButtons('inside','action')">
+                                            {{ insideActionButtons.heading }}
+                                        </th>
+                                    </ng-container>
                                 </tr>
                             </ng-template>
+                            
                             <ng-template pTemplate="body" let-internalDataRow>
                                 <tr>
                                     <td *ngFor="let item of internalDataRow | keyvalue">
                                         {{item.value}}
                                     </td>
+                                    <ng-container *ngIf="getButtons('inside','router').length">
+                                        <td *ngFor="let insideRouterButtons of getButtons('inside','router')">
+                                            <button [routerLink]="generateLink(rowData, insideRouterButtons)">{{ insideRouterButtons.text }}</button>
+                                        </td>
+                                    </ng-container>
+                                    <ng-container *ngIf="getButtons('inside','action').length">
+                                        <td *ngFor="let insideActionButtons of getButtons('inside','action')">
+                                            <button (click)="generateLink(rowData, insideActionButtons)">{{ insideActionButtons.text }}</button>
+                                        </td>
+                                    </ng-container>
                                 </tr>
                             </ng-template>
+
                         </p-table>
                     </td>
                 </tr>
+
             </ng-template>
         </p-table>
     </div> 

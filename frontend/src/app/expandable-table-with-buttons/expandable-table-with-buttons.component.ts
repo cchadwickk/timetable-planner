@@ -15,7 +15,7 @@ export class ExpandableTableWithButtonsComponent implements OnInit {
   @Input() expandColumn: string;
   @Input() expandHeading: string;
   @Input() expandKey: string;
-  @Input() infoButton?: LooseObject;
+  @Input() buttons?: LooseObject[] = [];
 
   constructor() { }
 
@@ -48,9 +48,15 @@ export class ExpandableTableWithButtonsComponent implements OnInit {
     return this.filteredKeys().length+1;
   }
 
-  generateLink(rowData: LooseObject): string{
+  getButtons(position: string, type: string): LooseObject[]{    //Filter and get buttons based on provided position and type
+    const retButtons = this.buttons.filter(item => 
+      (item.position==position && item.type==type));
+    return retButtons;
+  }
+
+  generateLink(rowData: LooseObject, buttonInfo: LooseObject): string{
     let temp = "";
-    let pathstring = this.infoButton.route;
+    let pathstring = buttonInfo.path;
     let pathelements = pathstring.split('|');
     pathelements.forEach(pathelement => {
       if(pathelement[0] == '$')
