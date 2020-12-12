@@ -37,7 +37,7 @@ export class GuestResultsComponent implements OnInit {
     if(!this.keysFilter)
       return Object.keys(this.data[0]);
     for( let item in this.data[0] ){
-      if(!this.keysFilter.includes(item)&&item!=this.expandColumn)
+      if(!this.keysFilter.includes(item) && item!=this.expandColumn)
         retval.push(item);
     }
     return retval;

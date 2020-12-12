@@ -22,7 +22,7 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="rowexpansion" let-rowData>
-            <tr>
+            <tr *ngIf="remainingKeys().length">
                 <td [attr.colspan]="filterKeyLength()">
                     <p-table [value]="[rowData]" [dataKey]="[uniqueKey]">
                         <ng-template pTemplate="caption">
