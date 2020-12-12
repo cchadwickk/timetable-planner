@@ -65,7 +65,7 @@ function publicCourseLists(req, res){
     searchterm = {
         private: false
     }
-    CourseList.find(searchterm, { _id:0 , __v:0, creatorEmail: 0, private: 0 } )
+    CourseList.find(searchterm, { _id:0, creatorEmail: 0, private: 0 } )
     .then( result => {
         res.send(result);
     });
