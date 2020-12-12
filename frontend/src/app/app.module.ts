@@ -14,6 +14,7 @@ import { AboutComponent } from './about/about.component';
 import { AdminComponent } from './admin/admin.component';
 import { GuestComponent } from './guest/guest.component';
 import { ExpandableTableWithButtonsComponent } from './expandable-table-with-buttons/expandable-table-with-buttons.component';
+import { GuestTimetablesComponent } from './guest-timetables/guest-timetables.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ExpandableTableWithButtonsComponent } from './expandable-table-with-but
     AboutComponent,
     AdminComponent,
     GuestComponent,
-    ExpandableTableWithButtonsComponent
+    ExpandableTableWithButtonsComponent,
+    GuestTimetablesComponent
   ],
   imports: [
     BrowserModule,

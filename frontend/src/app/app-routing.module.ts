@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { AboutComponent } from './about/about.component';
 import { AdminComponent } from './admin/admin.component';
 import { GuestComponent } from './guest/guest.component';
+import { GuestTimetablesComponent } from './guest-timetables/guest-timetables.component';
 
 const routes: Routes = [
   { path: 'secure', component: SecureViewComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'guest', component: GuestComponent },
+  { path: 'guest-timetables/:courseListName', component: GuestTimetablesComponent },
   { path: '', redirectTo: '/about', pathMatch: 'full' },
 ];
 
