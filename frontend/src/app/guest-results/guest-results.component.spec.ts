@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ArrayToTableComponent } from './array-to-table.component';
+import { GuestResultsComponent } from './guest-results.component';
 
-describe('ArrayToTableComponent', () => {
-  let component: ArrayToTableComponent;
-  let fixture: ComponentFixture<ArrayToTableComponent>;
+describe('GuestResultsComponent', () => {
+  let component: GuestResultsComponent;
+  let fixture: ComponentFixture<GuestResultsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ArrayToTableComponent ]
+      declarations: [ GuestResultsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ArrayToTableComponent);
+    fixture = TestBed.createComponent(GuestResultsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

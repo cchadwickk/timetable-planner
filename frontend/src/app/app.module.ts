@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import {TableModule} from 'primeng/table';
 
 import { AppComponent } from './app.component';
 import { TopbarComponent } from './topbar/topbar.component';
@@ -12,7 +13,8 @@ import { RegisterComponent } from './register/register.component';
 import { AboutComponent } from './about/about.component';
 import { AdminComponent } from './admin/admin.component';
 import { GuestComponent } from './guest/guest.component';
-import { ArrayToTableComponent } from './array-to-table/array-to-table.component';
+import { GuestResultsComponent } from './guest-results/guest-results.component';
+import { GuestCourseListsComponent } from './guest-course-lists/guest-course-lists.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +26,15 @@ import { ArrayToTableComponent } from './array-to-table/array-to-table.component
     AboutComponent,
     AdminComponent,
     GuestComponent,
-    ArrayToTableComponent
+    GuestResultsComponent,
+    GuestCourseListsComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

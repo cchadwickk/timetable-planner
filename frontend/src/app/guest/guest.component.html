@@ -1,21 +1,28 @@
 <br><br>
-<div>
-    <label>Subject:
-        <input [(ngModel)]="subject" placeholder="Subject"/>
-    </label>
-    <label>Course:
-        <input [(ngModel)]="course" placeholder="Course"/>
-    </label>
-    <button (click)="mainSearch()" >
-        Search
-    </button>
+<div class=row>
+    <div class=column>
+        <div class=contentbox>
+            <label>Subject:
+                <input [(ngModel)]="subject" placeholder="Subject"/>
+            </label>
+            <label>Course:
+                <input [(ngModel)]="course" placeholder="Course"/>
+            </label>
+            <button (click)="mainSearch()" >
+                Search
+            </button>
+        </div>
+        <div class=contentbox>
+            <label>Keyword:
+                    <input [(ngModel)]="keyword" placeholder="Keyword"/>
+            </label>
+            <button (click)="keywordSearch()">
+                Search
+            </button>
+        </div>
+    </div>
+    <app-guest-results [data]=openService.getResults [heading]=getHeader [keysFilter]=getFilter [uniqueKey]=getUnique></app-guest-results>
 </div>
-<div>
-    <label>Keyword:
-            <input [(ngModel)]="keyword" placeholder="Keyword"/>
-    </label>
-    <button (click)="keywordSearch()">
-        Search
-    </button>
+<div class=row>
+    <app-guest-results [data]=openService.searchResults [heading]=resultHeader [keysFilter]=resultFilter [uniqueKey]=resultUnique></app-guest-results>
 </div>
-<app-array-to-table [data]=openService.searchResults [header]=resultHeader [keysFilter]=resultFilter></app-array-to-table>

@@ -45,6 +45,7 @@ export class OpenService {
     return this.http.get<LooseObject[]>(apiPath, this.httpOptions).pipe(
       tap(res => {
         this.searchResults = res;
+        console.log(res);
         this.alertService.add("Keyword search executed");
       })
     );
@@ -55,6 +56,7 @@ export class OpenService {
     return this.http.get<LooseObject[]>(apiPath, this.httpOptions).pipe(
       tap(res => {
         this.getResults = res;
+        console.log(res);
         this.alertService.add("Public Course Lists Fetched");
       })
     )
@@ -65,6 +67,7 @@ export class OpenService {
     return this.http.get<LooseObject[]>(apiPath, this.httpOptions).pipe(
       tap(res => {
         this.getResults = res;
+        console.log(res);
         this.alertService.add("Public Course List Timetables Fetched");
       })
     )
