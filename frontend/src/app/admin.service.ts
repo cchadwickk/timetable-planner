@@ -5,6 +5,7 @@ import { env } from '../environments/environment'
 import { tap } from 'rxjs/operators';
 import { LooseObject } from './object-template';
 import { AlertService } from './alert.service';
+import { EmailValidator } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,38 @@ export class AdminService {
         this.adminResults = res;
         console.log(res);
         this.alertService.add("Users fetched");
+      })
+    );
+  }
+
+  updateReview(subject: string, course: string, email: string, visibility: boolean): Observable<LooseObject[]> {
+    const body = {
+      visibility: visibility,
+      subject: subject,
+      email: email,
+      course: course
+    };
+
+    let apiPath = this.baseUrl+'/review';
+    return this.http.put<LooseObject[]>(apiPath, body, this.httpOptions).pipe(
+      tap(res => {
+        console.log(res);
+        this.alertService.add("Review toggled successfully");
+      })
+    );
+  }
+
+  updateUser(email: string, admin: boolean, active: boolean): Observable<LooseObject[]> {
+    let apiPath = this.baseUrl+'/user';
+    const body = {
+      email: email,
+      admin: admin,
+      active: active
+    }
+    return this.http.put<LooseObject[]>(apiPath, body, this.httpOptions).pipe(
+      tap(res => {
+        console.log(res);
+        this.alertService.add("User information toggled");
       })
     );
   }

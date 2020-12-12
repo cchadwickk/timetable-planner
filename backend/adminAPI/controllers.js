@@ -25,19 +25,19 @@ function getUsers(req, res){
 }
 
 function updateUser(req, res){
-    var { email, admin } = req.body;
-    if(!email||!admin)
-        return res.status(400).send({"message":"Invalid data/empty : email or admin"});
+    var { email, admin, active } = req.body;
+    if(!email)
+        return res.status(400).send({"message":"Invalid data/empty : email"});
     
     searchObj = {email: email};
-    updateObj = { admin: admin };
+    updateObj = { admin: admin, active: active };
 
     Account.find(searchObj).then(result => {
         if(result.length==0)
             return res.status(400).send({"message":"No users found by that name"})
         else{
             Account.updateOne(searchObj, updateObj).then(result => {
-                return res.send({"message":"Admin privileges granted to "+email});
+                return res.send({"message":"User modified: "+email});
             });
         }
     });
