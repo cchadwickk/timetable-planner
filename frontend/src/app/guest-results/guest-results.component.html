@@ -45,7 +45,7 @@
                     </p-table>
                 </td>
             </tr>
-            <tr *ngIf="rowData[expandColumn] && rowData[expandColumn]length">
+            <tr *ngIf="rowData[expandColumn] && rowData[expandColumn].length">
                 <td [attr.colspan]="filterKeyLength()">
                     <p-table [value]="rowData[expandColumn]" [dataKey]="[expandKey]">
                         <ng-template pTemplate="caption">
