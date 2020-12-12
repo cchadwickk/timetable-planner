@@ -14,6 +14,6 @@ var CourseList = new Schema({
     private: {type: Boolean, default: true},
     lastUpdated: {type: Date, default: Date.now},
     listData: [ListData]
-});
+}, {versionKey: false});
 
 module.exports = mongoose.model('CourseList', CourseList);

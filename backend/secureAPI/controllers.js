@@ -57,7 +57,7 @@ function deleteCourseList(req, res){
 
 function getCourseLists(req, res){
     searchObj = { creatorEmail: req.user.email };
-    projectionObj = { _id: 0, creatorEmail: 0, creatorName: 0 };
+    projectionObj = { _id: 0, __v: 0 , creatorEmail: 0, creatorName: 0 };
     CourseList.find(searchObj, projectionObj).then(result => {
         res.send(result);
     })
