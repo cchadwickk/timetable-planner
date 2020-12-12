@@ -21,7 +21,8 @@ export class GuestComponent implements OnInit {
     'Unique':"catalog_nbr",
     'ExpandHeading':"REVIEWS",
     'ExpandColumn':"reviews",
-    'ExpandKey':"reviewDate"}
+    'ExpandKey':"reviewDate"
+  }
 
   getObj ={    
     'Header': "PUBLIC COURSE LISTS",
@@ -29,7 +30,12 @@ export class GuestComponent implements OnInit {
     'Unique':"courseListName",
     'ExpandHeading':"SUBJECT COURSE COMBINATIONS",
     'ExpandColumn':"listData",
-    'ExpandKey':"course"}
+    'ExpandKey':"course",
+    'infoButton':{
+      'heading': "TIMETABLES",
+      'text': "Get",
+      'route': "/guest-timetables/|$courseListName"
+    }}
 
   constructor(public openService: OpenService, private alertService: AlertService, private router: Router) { }
 

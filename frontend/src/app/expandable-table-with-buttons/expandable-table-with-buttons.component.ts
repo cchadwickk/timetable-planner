@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { LooseObject } from '../object-template';
 
 @Component({
-  selector: 'app-guest-results',
-  templateUrl: './guest-results.component.html',
-  styleUrls: ['./guest-results.component.css']
+  selector: 'app-expandable-table-with-buttons',
+  templateUrl: './expandable-table-with-buttons.component.html',
+  styleUrls: ['./expandable-table-with-buttons.component.css']
 })
-export class GuestResultsComponent implements OnInit {
+export class ExpandableTableWithButtonsComponent implements OnInit {
 
   @Input() data: LooseObject[];
   @Input() heading: string;
@@ -15,6 +15,7 @@ export class GuestResultsComponent implements OnInit {
   @Input() expandColumn: string;
   @Input() expandHeading: string;
   @Input() expandKey: string;
+  @Input() infoButton?: LooseObject;
 
   constructor() { }
 
@@ -45,5 +46,18 @@ export class GuestResultsComponent implements OnInit {
 
   filterKeyLength(): number{
     return this.filteredKeys().length+1;
+  }
+
+  generateLink(rowData: LooseObject): string{
+    let temp = "";
+    let pathstring = this.infoButton.route;
+    let pathelements = pathstring.split('|');
+    pathelements.forEach(pathelement => {
+      if(pathelement[0] == '$')
+        temp += rowData[pathelement.slice(1)];
+      else
+        temp += pathelement;
+    });
+    return temp;
   }
 }

@@ -13,8 +13,7 @@ import { RegisterComponent } from './register/register.component';
 import { AboutComponent } from './about/about.component';
 import { AdminComponent } from './admin/admin.component';
 import { GuestComponent } from './guest/guest.component';
-import { GuestResultsComponent } from './guest-results/guest-results.component';
-import { GuestCourseListsComponent } from './guest-course-lists/guest-course-lists.component';
+import { ExpandableTableWithButtonsComponent } from './expandable-table-with-buttons/expandable-table-with-buttons.component';
 
 @NgModule({
   declarations: [
@@ -26,8 +25,7 @@ import { GuestCourseListsComponent } from './guest-course-lists/guest-course-lis
     AboutComponent,
     AdminComponent,
     GuestComponent,
-    GuestResultsComponent,
-    GuestCourseListsComponent
+    ExpandableTableWithButtonsComponent
   ],
   imports: [
     BrowserModule,

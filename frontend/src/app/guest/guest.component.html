@@ -21,22 +21,23 @@
             </button>
         </div>
     </div>
-    <app-guest-results 
+    <app-expandable-table-with-buttons 
         [data]=openService.getResults 
         [heading]=getObj.Header 
         [keysFilter]=getObj.Filter 
         [uniqueKey]=getObj.Unique
         [expandColumn]=getObj.ExpandColumn
         [expandKey]=getObj.ExpandKey
-        [expandHeading]=getObj.ExpandHeading></app-guest-results>
+        [expandHeading]=getObj.ExpandHeading
+        [infoButton]=getObj.infoButton></app-expandable-table-with-buttons>
 </div>
 <div class=row>
-    <app-guest-results 
+    <app-expandable-table-with-buttons 
         [data]=openService.searchResults 
         [heading]=resultObj.Header 
         [keysFilter]=resultObj.Filter 
         [uniqueKey]=resultObj.Unique
         [expandColumn]=resultObj.ExpandColumn
         [expandKey]=resultObj.ExpandKey
-        [expandHeading]=resultObj.ExpandHeading></app-guest-results>
+        [expandHeading]=resultObj.ExpandHeading></app-expandable-table-with-buttons>
 </div>
