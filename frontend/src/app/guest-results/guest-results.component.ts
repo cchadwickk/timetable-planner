@@ -12,6 +12,9 @@ export class GuestResultsComponent implements OnInit {
   @Input() heading: string;
   @Input() keysFilter: string[];
   @Input() uniqueKey: string;
+  @Input() expandColumn: string;
+  @Input() expandHeading: string;
+  @Input() expandKey: string;
 
   constructor() { }
 
@@ -34,9 +37,13 @@ export class GuestResultsComponent implements OnInit {
     if(!this.keysFilter)
       return Object.keys(this.data[0]);
     for( let item in this.data[0] ){
-      if(!this.keysFilter.includes(item)&&item!='reviews')
+      if(!this.keysFilter.includes(item)&&item!=this.expandColumn)
         retval.push(item);
     }
     return retval;
+  }
+
+  filterKeyLength(): number{
+    return this.filteredKeys().length+1;
   }
 }

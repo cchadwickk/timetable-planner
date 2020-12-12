@@ -15,13 +15,21 @@ export class GuestComponent implements OnInit {
   course: string;
   keyword: string;
 
-  resultHeader: string = "RESULTS";
-  resultFilter: string[] = ['subject','catalog_nbr','className','class_section','ssr_component','start_time','end_time','days'];
-  resultUnique: string = "catalog_nbr";
+  resultObj ={
+    'Header': "RESULTS",
+    'Filter': ['subject','catalog_nbr','className','class_section','ssr_component','start_time','end_time','days'],
+    'Unique':"catalog_nbr",
+    'ExpandHeading':"REVIEWS",
+    'ExpandColumn':"reviews",
+    'ExpandKey':"reviewDate"}
 
-  getHeader: string = "PUBLIC COURSE LISTS";
-  getFilter: string[] = ['courseListName','creatorName','lastUpdated','noOfCourses'];
-  getUnique: string = "courseListName";
+  getObj ={    
+    'Header': "PUBLIC COURSE LISTS",
+    'Filter': ['courseListName','creatorName','lastUpdated','noOfCourses'],
+    'Unique':"courseListName",
+    'ExpandHeading':"SUBJECT COURSE COMBINATIONS",
+    'ExpandColumn':"listData",
+    'ExpandKey':"course"}
 
   constructor(public openService: OpenService, private alertService: AlertService, private router: Router) { }
 

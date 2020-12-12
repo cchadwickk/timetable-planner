@@ -21,8 +21,22 @@
             </button>
         </div>
     </div>
-    <app-guest-results [data]=openService.getResults [heading]=getHeader [keysFilter]=getFilter [uniqueKey]=getUnique></app-guest-results>
+    <app-guest-results 
+        [data]=openService.getResults 
+        [heading]=getObj.Header 
+        [keysFilter]=getObj.Filter 
+        [uniqueKey]=getObj.Unique
+        [expandColumn]=getObj.ExpandColumn
+        [expandKey]=getObj.ExpandKey
+        [expandHeading]=getObj.ExpandHeading></app-guest-results>
 </div>
 <div class=row>
-    <app-guest-results [data]=openService.searchResults [heading]=resultHeader [keysFilter]=resultFilter [uniqueKey]=resultUnique></app-guest-results>
+    <app-guest-results 
+        [data]=openService.searchResults 
+        [heading]=resultObj.Header 
+        [keysFilter]=resultObj.Filter 
+        [uniqueKey]=resultObj.Unique
+        [expandColumn]=resultObj.ExpandColumn
+        [expandKey]=resultObj.ExpandKey
+        [expandHeading]=resultObj.ExpandHeading></app-guest-results>
 </div>

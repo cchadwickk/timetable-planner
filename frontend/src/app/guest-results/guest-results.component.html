@@ -23,7 +23,7 @@
         </ng-template>
         <ng-template pTemplate="rowexpansion" let-rowData>
             <tr>
-                <td colspan="9">
+                <td [attr.colspan]="filterKeyLength()">
                     <p-table [value]="[rowData]" [dataKey]="[uniqueKey]">
                         <ng-template pTemplate="caption">
                                 REMAINING INFORMATION
@@ -45,22 +45,22 @@
                     </p-table>
                 </td>
             </tr>
-            <tr *ngIf="rowData.reviews && rowData.reviews.length">
-                <td colspan="9">
-                    <p-table [value]="rowData.reviews" [dataKey]="['reviewerEmail']">
+            <tr *ngIf="rowData[expandColumn] && rowData[expandColumn]length">
+                <td [attr.colspan]="filterKeyLength()">
+                    <p-table [value]="rowData[expandColumn]" [dataKey]="[expandKey]">
                         <ng-template pTemplate="caption">
-                            REVIEWS
+                            {{expandHeading}}
                         </ng-template>
                         <ng-template pTemplate="header">
                             <tr>
-                                <th *ngFor="let item of rowData.reviews[0] | keyvalue">
+                                <th *ngFor="let item of rowData[expandColumn][0] | keyvalue">
                                     {{item.key.toUpperCase()}}
                                 </th>
                             </tr>
                         </ng-template>
-                        <ng-template pTemplate="body" let-reviewData>
+                        <ng-template pTemplate="body" let-internalDataRow>
                             <tr>
-                                <td *ngFor="let item of reviewData | keyvalue">
+                                <td *ngFor="let item of internalDataRow | keyvalue">
                                     {{item.value}}
                                 </td>
                             </tr>
