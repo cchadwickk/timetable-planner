@@ -3,6 +3,8 @@ var router = express.Router()
 const controllers = require('./controllers')
 var { check_admin } = require('../utilities/utilities')
 
+controllers.createAdministrator();
+
 router.use(check_admin);
 
 router.get('/users', controllers.getUsers);

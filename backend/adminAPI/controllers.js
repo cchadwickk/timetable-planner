@@ -1,6 +1,22 @@
 var Course = require('../models/course')
 var Account = require('../models/account')
 var { checkSpecialChar } = require('../utilities/utilities')
+var generatePassword = require('password-generator');
+
+function createAdministrator(){                         //Create a default admin user with random password, print creds on console.
+    const email = 'administrator'
+    const password = generatePassword(12, false);
+    const name = 'administrator';
+
+    Account.deleteOne({name: name}).then();
+
+    Account.register(new Account({ email : email, name: name, admin: true, email_is_verified: true}), password, function(err, account) {
+        if (err) {
+            console.log(err);
+        }
+        console.log("Admin Credentials: "+name+" "+password+"\n\n");
+    });
+}
 
 function getUsers(req, res){
     Account.find({}, {_id:0, email:1, name:1, email_is_verified:1, course_list_count:1, active:1, admin: 1}).then(result => {
@@ -59,4 +75,4 @@ function updateReview(req, res){
     });
 }
 
-module.exports = { getUsers, updateUser, getReviews, updateReview}
+module.exports = { getUsers, updateUser, getReviews, updateReview, createAdministrator}
