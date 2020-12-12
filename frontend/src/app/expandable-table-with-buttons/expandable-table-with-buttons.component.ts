@@ -12,9 +12,9 @@ export class ExpandableTableWithButtonsComponent implements OnInit {
   @Input() heading: string;
   @Input() keysFilter: string[];
   @Input() uniqueKey: string;
-  @Input() expandColumn: string;
-  @Input() expandHeading: string;
-  @Input() expandKey: string;
+  @Input() expandColumn?: string;
+  @Input() expandHeading?: string;
+  @Input() expandKey?: string;
   @Input() buttons?: LooseObject[] = [];
 
   constructor() { }
@@ -28,7 +28,7 @@ export class ExpandableTableWithButtonsComponent implements OnInit {
       return Object.keys(this.data[0]);
     for( let item in this.data[0] ){
       if(this.keysFilter.includes(item))
-        retval.push(item);
+        retval.unshift(item);
     }
     return retval;
   }

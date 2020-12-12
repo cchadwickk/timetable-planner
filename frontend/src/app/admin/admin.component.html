@@ -1,1 +1,21 @@
-<p>admin works!</p>
+<div class=row>
+    <div class=column>
+        <app-expandable-table-with-buttons 
+        [data]=adminService.adminResults 
+        [heading]=usersObj.Header 
+        [keysFilter]=usersObj.Filter 
+        [uniqueKey]=usersObj.Unique
+        [buttons]=usersObj.buttons></app-expandable-table-with-buttons>
+    </div>
+    <div class=column>
+        <app-expandable-table-with-buttons 
+            [data]=adminService.reviewsResults 
+            [heading]=reviewsObj.Header 
+            [keysFilter]=reviewsObj.Filter 
+            [uniqueKey]=reviewsObj.Unique
+            [expandColumn]=reviewsObj.ExpandColumn
+            [expandKey]=reviewsObj.ExpandKey
+            [expandHeading]=reviewsObj.ExpandHeading
+            [buttons]=reviewsObj.buttons></app-expandable-table-with-buttons>
+    </div>
+</div>

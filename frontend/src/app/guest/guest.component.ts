@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { OpenService } from '../open.service';
-import { AlertService } from '../alert.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-guest',
@@ -39,9 +37,10 @@ export class GuestComponent implements OnInit {
       'position': "main"
     }]}
 
-  constructor(public openService: OpenService, private alertService: AlertService, private router: Router) { }
+  constructor(public openService: OpenService) { }
 
   ngOnInit(): void {
+    this.openService.searchResults=[];    //Empty any previous results
     this.publicCourseList();
   }
 

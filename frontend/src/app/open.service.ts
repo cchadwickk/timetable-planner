@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { env } from '../environments/environment'
-import { map, catchError, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { LooseObject } from './object-template';
 import { AlertService } from './alert.service';
 
