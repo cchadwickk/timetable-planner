@@ -68,7 +68,8 @@ export class CourseListComponent implements OnInit {
   ngOnInit(): void {
     if(this.authService.loggedIn==false)      //If not logged in, redirect to about
       this.router.navigate(['/about']);
-    this.openService.searchResults=[];    //Empty any previous results  
+    this.openService.searchResults=[];    //Empty any previous results 
+    this.secureService.listTimetableResults=[]; 
     this.getTimetables();
   }
 
@@ -90,7 +91,7 @@ export class CourseListComponent implements OnInit {
 
   getTimetables(): void {
     this.courseListName = String(this.route.snapshot.paramMap.get('courseListName'));
-    this.listObj.Header = "COURSE LIST: "+this.courseListName;
+    this.listObj.Header = "COURSE LIST: "+this.courseListName+"\n"+this.secureService.getListDesc(this.courseListName);
     this.secureService.getListTimetables(this.courseListName).subscribe();
   }
 

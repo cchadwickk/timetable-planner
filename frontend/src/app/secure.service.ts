@@ -26,6 +26,11 @@ export class SecureService {
     return retval;
   }
 
+  getListDesc(courseListName: string): LooseObject{
+    let retval = this.courseListResults.find(o => o.courseListName === courseListName);
+    return retval.courseListDesc;
+  }
+
   getCourseLists(): Observable<LooseObject[]> {
     let apiPath = this.baseUrl+'/courseList';
     return this.http.get<LooseObject[]>(apiPath, this.httpOptions).pipe(
@@ -38,7 +43,7 @@ export class SecureService {
   }
 
   getListTimetables(courseListName: string): Observable<LooseObject[]>{
-    let apiPath = this.baseUrl+'/courseListTimetables/'+courseListName;
+    let apiPath = this.baseUrl+'/courseListTimetables/'+encodeURIComponent(courseListName);
     return this.http.get<LooseObject[]>(apiPath, this.httpOptions).pipe(
       tap(res => {
         this.listTimetableResults = res;
