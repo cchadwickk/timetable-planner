@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SecureService } from '../secure.service';
 import { OpenService } from '../open.service';
+import { LooseObject } from '../object-template';
 
 @Component({
   selector: 'app-secure',
@@ -74,4 +75,31 @@ export class SecureComponent implements OnInit {
     });
   }
 
+  addReview(subject: string, course: string){
+    console.log("Inside addReview");
+  }
+
+  delCourseList(courseListName: string){
+    if(confirm("Delete course list: "+courseListName+" ?"))
+      this.secureService.delCourseList(courseListName).subscribe(()=>{
+        this.getCourseList();
+      });
+  }
+
+  executeButtonAction(eventObj: LooseObject){
+    let {rowData, buttonInfo} = eventObj;
+    let temp = "";
+
+    let pathstring = buttonInfo.path;
+    let pathelements = pathstring.split('|');
+    pathelements.forEach(pathelement => {
+      if(pathelement[0] == '$')
+        temp += rowData[pathelement.slice(1)];
+      else
+        temp += pathelement;
+    });
+
+    console.log("Evaluating: "+temp);
+    eval(temp);
+  }
 }

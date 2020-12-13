@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../admin.service';
 import { LooseObject } from '../object-template';
-import { EmailValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-admin',

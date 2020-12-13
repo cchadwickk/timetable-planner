@@ -44,7 +44,8 @@
         [expandColumn]=listObj.ExpandColumn
         [expandKey]=listObj.ExpandKey
         [expandHeading]=listObj.ExpandHeading
-        [buttons]=listObj.buttons></app-expandable-table-with-buttons>
+        [buttons]=listObj.buttons
+        (actionEvent)=executeButtonAction($event)></app-expandable-table-with-buttons>
 </div>
 <div class=row>
     <app-expandable-table-with-buttons 
@@ -55,5 +56,6 @@
         [expandColumn]=resultObj.ExpandColumn
         [expandKey]=resultObj.ExpandKey
         [expandHeading]=resultObj.ExpandHeading
-        [buttons]=resultObj.buttons></app-expandable-table-with-buttons>
+        [buttons]=resultObj.buttons
+        (actionEvent)=executeButtonAction($event)></app-expandable-table-with-buttons>
 </div>

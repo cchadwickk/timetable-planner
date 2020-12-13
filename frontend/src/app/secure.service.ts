@@ -50,4 +50,14 @@ export class SecureService {
     );
   }
 
+  delCourseList(courseListName: string): Observable<LooseObject[]> {
+    let apiPath = this.baseUrl+'/courseList/'+courseListName;
+    return this.http.delete<LooseObject[]>(apiPath, this.httpOptions).pipe(
+      tap(res => {
+        console.log(res);
+        this.alertService.add("Deleted courselist successfully.");
+      })
+    );
+  }
+
 }
