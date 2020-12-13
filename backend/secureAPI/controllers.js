@@ -14,9 +14,6 @@ function createCourseList(req, res){
     insertObj = { listData: listData };
     if(private !== null)
         insertObj["private"] = private;
-    if(year !== null)
-        insertObj["year"] = year;
-
 
     CourseList.find(searchObj).then(result => {
         if(result.length){                                                             //If there exists a courselist by that name
@@ -88,6 +85,10 @@ function privateCourseTimetable(req, res){
         searchterm = { $or: searchterm };                   //Search mongo for documents that match
         Course.find(searchterm, { catalog_description:0, descr:0, className:0, _id:0 })
         .then( result2 => {
+            result[0].listData.forEach(element => {             //Add year field
+                if(element.year)
+                    result2.find(x => (x.subject==element.subject&&x.catalog_nbr==element.course))['year']=element.year;
+            });
             res.send(result2);
         });
     });
