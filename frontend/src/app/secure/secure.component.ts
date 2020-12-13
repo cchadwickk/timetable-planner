@@ -62,7 +62,7 @@ export class SecureComponent implements OnInit {
       'position': "main"
     },{
       'heading': "-",
-      'text': "EXPAND",
+      'text': "VIEW",
       'path': "/courseList/|$courseListName",
       'type': "router",
       'position': "main"
