@@ -25,7 +25,7 @@ export class CourseListComponent implements OnInit {
 
   listObj ={    
     'Header': "COURSE LIST TIMETABLE",
-    'Filter': ['subject','catalog_nbr','message'],
+    'Filter': ['subject','catalog_nbr'],
     'Unique':"catalog_nbr",
     'buttons':[{
       'heading': "-",
@@ -92,7 +92,11 @@ export class CourseListComponent implements OnInit {
   getTimetables(): void {
     this.courseListName = String(this.route.snapshot.paramMap.get('courseListName'));
     this.listObj.Header = "COURSE LIST: "+this.courseListName+"\n"+this.secureService.getListDesc(this.courseListName);
-    this.secureService.getListTimetables(this.courseListName).subscribe();
+    this.secureService.getListTimetables(this.courseListName).subscribe(()=>{
+      if(this.secureService.listTimetableResults==[]){
+        this.listObj.Header += "\n\n No subject course combination yet. Search from left and add."
+      }
+    });
   }
 
   executeButtonAction(eventObj: LooseObject){

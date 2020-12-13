@@ -1,3 +1,8 @@
+<div *ngIf="data.length==0">
+    <ng-template pTemplate="caption">
+            {{heading}}
+    </ng-template>
+</div>>
 <div *ngIf="data.length">
         <p-table [value]="data" [dataKey]="[uniqueKey]" autoLayout="true" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
         totalRecords="data.length" pageLinks="3">
