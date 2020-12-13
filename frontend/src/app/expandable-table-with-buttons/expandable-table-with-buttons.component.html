@@ -1,9 +1,11 @@
-<div *ngIf="data.length==0">
-    <ng-template pTemplate="caption">
-            {{heading}}
-    </ng-template>
-</div>>
-<div *ngIf="data.length">
+<div *ngIf="data.length && data[0]['INFO']">
+    <p-table>
+        <ng-template pTemplate="caption">
+                {{heading}}<br>NO DATA FOUND
+        </ng-template>
+    </p-table>
+</div>
+<div *ngIf="data.length && !data[0]['INFO']">
         <p-table [value]="data" [dataKey]="[uniqueKey]" autoLayout="true" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
         totalRecords="data.length" pageLinks="3">
 

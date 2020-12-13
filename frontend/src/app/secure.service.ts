@@ -27,8 +27,16 @@ export class SecureService {
   }
 
   getListDesc(courseListName: string): LooseObject{
-    let retval = this.courseListResults.find(o => o.courseListName === courseListName);
-    return retval.courseListDesc;
+    if(this.courseListResults==[]){
+      this.getListTimetables(courseListName).subscribe(()=>{
+        let retval = this.courseListResults.find(o => o.courseListName === courseListName);
+        return retval.courseListDesc;
+      });
+    }
+    else{
+      let retval = this.courseListResults.find(o => o.courseListName === courseListName);
+      return retval.courseListDesc;
+    }
   }
 
   getCourseLists(): Observable<LooseObject[]> {
@@ -47,6 +55,8 @@ export class SecureService {
     return this.http.get<LooseObject[]>(apiPath, this.httpOptions).pipe(
       tap(res => {
         this.listTimetableResults = res;
+        if(res.length==0)
+          this.listTimetableResults = [{"INFO":"NO"}];
         console.log(res);
         this.alertService.add("List timetables fetched");
       })
