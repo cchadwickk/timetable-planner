@@ -78,7 +78,7 @@ export class CourseListComponent implements OnInit {
     let body = this.secureService.courseListResults.find(o => o.courseListName === this.courseListName);
     body.listData.forEach(element => {
       if(element.subject==subject&&element.course==course){
-        window.prompt("ALREADY ADDED");
+        window.alert("ALREADY ADDED");
         return;
       }
     });
@@ -95,7 +95,7 @@ export class CourseListComponent implements OnInit {
 
   removeCourse(subject: string, course: string){
     let body = this.secureService.courseListResults.find(o => o.courseListName === this.courseListName);  //Get body for courselistname
-    body.listData = body.listData.filter(obj => (obj.subject==subject && obj.course==course));            //remove course
+    body.listData = body.listData.filter(obj => (obj.subject!=subject || obj.course!=course));            //remove course
     this.secureService.updateCourseList(body).subscribe(()=>{
       this.getTimetables();
     });

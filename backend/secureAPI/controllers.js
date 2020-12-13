@@ -4,7 +4,7 @@ var Account = require('../models/account')
 var { checkSpecialChar } = require('../utilities/utilities')
 
 function createCourseList(req, res){
-    var { courseListName, listData, private, courseListDesc} = req.body;
+    var { courseListName, listData, private, courseListDesc, year} = req.body;
     if( (!courseListName) || checkSpecialChar(courseListName))
         return res.status(400).send({"message":"Invalid data/empty : courseListName or listData"});
     if(req.user.course_list_count == 20)
@@ -14,6 +14,9 @@ function createCourseList(req, res){
     insertObj = { listData: listData };
     if(private !== null)
         insertObj["private"] = private;
+    if(year !== null)
+        insertObj["year"] = year;
+
 
     CourseList.find(searchObj).then(result => {
         if(result.length){                                                             //If there exists a courselist by that name
@@ -79,7 +82,7 @@ function privateCourseTimetable(req, res){
         result[0].listData.forEach(element => {             //Iterate over the list to form a search document
             searchterm.push({ 
                 'subject':element.subject,
-                'catalog_nbr': String(element.course)
+                'catalog_nbr': element.course
             });
         });
         searchterm = { $or: searchterm };                   //Search mongo for documents that match
