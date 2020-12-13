@@ -26,13 +26,13 @@
             <br>
             <label>Private ?
                 <select [(ngModel)]="courseListPrivate">
-                    <option [value]="true" selected disabled hidden>true</option>
+                    <option [value]="true" selected>true</option>
                     <option [value]="false">false</option>
                 </select>
             </label>
             <br>
             <button (click)="createCourseList()">
-                Search
+                Create
             </button>
         </div>
     </div>
@@ -43,7 +43,8 @@
         [uniqueKey]=listObj.Unique
         [expandColumn]=listObj.ExpandColumn
         [expandKey]=listObj.ExpandKey
-        [expandHeading]=listObj.ExpandHeading></app-expandable-table-with-buttons>
+        [expandHeading]=listObj.ExpandHeading
+        [buttons]=listObj.buttons></app-expandable-table-with-buttons>
 </div>
 <div class=row>
     <app-expandable-table-with-buttons 
@@ -53,5 +54,6 @@
         [uniqueKey]=resultObj.Unique
         [expandColumn]=resultObj.ExpandColumn
         [expandKey]=resultObj.ExpandKey
-        [expandHeading]=resultObj.ExpandHeading></app-expandable-table-with-buttons>
+        [expandHeading]=resultObj.ExpandHeading
+        [buttons]=resultObj.buttons></app-expandable-table-with-buttons>
 </div>

@@ -21,23 +21,36 @@ export class SecureComponent implements OnInit {
     'Unique':"catalog_nbr",
     'ExpandHeading':"REVIEWS",
     'ExpandColumn':"reviews",
-    'ExpandKey':"reviewDate"
+    'ExpandKey':"reviewDate",
+    'buttons':[{
+      'heading': "OPTION",
+      'text': "REVIEW",
+      'path': "this.addReview('|$subject|', '|$catalog_nbr|' )",
+      'type': "action",
+      'position': "main"
+    }]
   }
 
   listObj ={    
     'Header': "YOUR COURSE LISTS",
-    'Filter': ['creatorName','lastUpdated','noOfCourses','private','courseListName'],
+    'Filter': ['creatorName','lastUpdated','noOfCourses','private','courseListName','courseListDesc'],
     'Unique':"courseListName",
     'ExpandHeading':"SUBJECT COURSE COMBINATIONS",
     'ExpandColumn':"listData",
-    'ExpandKey':"course"
-    // 'buttons':[{
-    //   'heading': "TIMETABLES",
-    //   'text': "Get",
-    //   'path': "/guest-timetables/|$courseListName",
-    //   'type': "router",
-    //   'position': "main"
-    // }]
+    'ExpandKey':"course",
+    'buttons':[{
+      'heading': "-",
+      'text': "DELETE",
+      'path': "this.delCourseList('|$courseListName|' )",
+      'type': "action",
+      'position': "main"
+    },{
+      'heading': "-",
+      'text': "EXPAND",
+      'path': "/courseList/|$courseListName",
+      'type': "router",
+      'position': "main"
+    }]
   }
 
   constructor(public openService: OpenService, public secureService: SecureService) { }
@@ -56,7 +69,9 @@ export class SecureComponent implements OnInit {
   }
 
   createCourseList(): void{
-    this.secureService.createCourseList(this.courseListName, this.courseListPrivate, this.courseListDesc).subscribe();
+    this.secureService.createCourseList(this.courseListName, this.courseListPrivate, this.courseListDesc).subscribe(()=>{
+      this.getCourseList();
+    });
   }
 
 }
