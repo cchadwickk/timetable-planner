@@ -70,26 +70,29 @@ function privateCourseTimetable(req, res){
         return res.status(400).send({"message":"Invalid data in courseListName, or empty"});
     searchterm = { courseListName: courseListName, creatorEmail: req.user.email };
     CourseList.find(searchterm, { listData: 1 })            //Get the courselist for the request
-    .then( result => {
+    .then( mainResult => {
         searchterm = [];
-        if(result.length == 0)
+        if(mainResult.length == 0)
             return res.send({"message": "No courseList by that name in your account"})
-        if(result[0].listData.length == 0)                  //Check if no courses in the list
+        if(mainResult[0].listData.length == 0)                  //Check if no courses in the list
             return res.send([]);
-        result[0].listData.forEach(element => {             //Iterate over the list to form a search document
+            mainResult[0].listData.forEach(element => {             //Iterate over the list to form a search document
             searchterm.push({ 
                 'subject':element.subject,
                 'catalog_nbr': element.course
             });
         });
         searchterm = { $or: searchterm };                   //Search mongo for documents that match
-        Course.find(searchterm, { catalog_description:0, descr:0, className:0, _id:0 })
-        .then( result2 => {
-            result[0].listData.forEach(element => {             //Add year field
-                if(element.year)
-                    result2.find(x => (x.subject==element.subject&&x.catalog_nbr==element.course))['year']=element.year;
+        Course.find(searchterm, { catalog_description:0, descr:0, className:0,reviews:0, _id:0 })
+        .then( innerResult => {
+            let innerResultCopy=JSON.parse(JSON.stringify(innerResult))
+            mainResult[0].listData.forEach(element => {             //Iterate over subject,course combo
+                if(element.year){
+                    index=innerResultCopy.findIndex(x => (x.catalog_nbr==element.course))
+                    innerResultCopy[index]['year']=element.year;
+                }
             });
-            res.send(result2);
+            res.send(innerResultCopy);
         });
     });
 }
