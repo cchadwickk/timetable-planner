@@ -8,26 +8,26 @@ import { AppComponent } from './app.component';
 import { TopbarComponent } from './topbar/topbar.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { AppRoutingModule } from './app-routing.module';
-import { SecureViewComponent } from './secure-view/secure-view.component';
 import { RegisterComponent } from './register/register.component';
 import { AboutComponent } from './about/about.component';
 import { AdminComponent } from './admin/admin.component';
 import { GuestComponent } from './guest/guest.component';
 import { ExpandableTableWithButtonsComponent } from './expandable-table-with-buttons/expandable-table-with-buttons.component';
 import { GuestTimetablesComponent } from './guest-timetables/guest-timetables.component';
+import { SecureComponent } from './secure/secure.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopbarComponent,
     AlertsComponent,
-    SecureViewComponent,
     RegisterComponent,
     AboutComponent,
     AdminComponent,
     GuestComponent,
     ExpandableTableWithButtonsComponent,
-    GuestTimetablesComponent
+    GuestTimetablesComponent,
+    SecureComponent
   ],
   imports: [
     BrowserModule,

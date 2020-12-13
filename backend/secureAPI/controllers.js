@@ -5,7 +5,7 @@ var { checkSpecialChar } = require('../utilities/utilities')
 
 function createCourseList(req, res){
     var { courseListName, listData, private } = req.body;
-    if( (!courseListName||listData.length==0) || checkSpecialChar(courseListName))
+    if( (!courseListName) || checkSpecialChar(courseListName))
         return res.status(400).send({"message":"Invalid data/empty : courseListName or listData"});
     if(req.user.course_list_count == 20)
         return res.status(400).send({"message":"CourseLists limit reached, delete a courselist first"});

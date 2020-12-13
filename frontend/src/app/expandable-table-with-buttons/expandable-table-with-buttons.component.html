@@ -1,5 +1,6 @@
 <div *ngIf="data.length">
-        <p-table [value]="data" [dataKey]="[uniqueKey]" autoLayout="true">
+        <p-table [value]="data" [dataKey]="[uniqueKey]" autoLayout="true" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
+        totalRecords="data.length" pageLinks="3">
 
             <ng-template pTemplate="caption">
                     {{heading}}
@@ -49,7 +50,7 @@
 
                 <tr *ngIf="remainingKeys().length">
                     <td [attr.colspan]="filterKeyLength()">
-                        <p-table [value]="[rowData]" [dataKey]="[uniqueKey]" autoLayout="true">
+                        <p-table [value]="[rowData]" [dataKey]="[uniqueKey]" autoLayout="true" >
 
                             <ng-template pTemplate="caption">
                                     REMAINING INFORMATION
@@ -77,7 +78,8 @@
 
                 <tr *ngIf="rowData[expandColumn] && rowData[expandColumn].length">
                     <td [attr.colspan]="filterKeyLength()">
-                        <p-table [value]="rowData[expandColumn]" [dataKey]="[expandKey]" autoLayout="true">
+                        <p-table [value]="rowData[expandColumn]" [dataKey]="[expandKey]" autoLayout="true" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,15,20]"
+                        totalRecords="rowData[expandColumn].length" pageLinks="3">
                             
                             <ng-template pTemplate="caption">
                                 {{expandHeading}}

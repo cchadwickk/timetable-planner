@@ -1,0 +1,43 @@
+<br><br>
+<div class=row>
+    <div class=column>
+        <div class=contentbox>
+            <label>Subject:
+                <input [(ngModel)]="subject" placeholder="Subject"/>
+            </label>
+            <label>Course:
+                <input [(ngModel)]="course" placeholder="Course"/>
+            </label>
+            <button (click)="mainSearch()" >
+                Search
+            </button>
+        </div>
+        <div class=contentbox>
+            <label>Keyword:
+                    <input [(ngModel)]="keyword" placeholder="Keyword"/>
+            </label>
+            <button (click)="keywordSearch()">
+                Search
+            </button>
+        </div>
+    </div>
+    <app-expandable-table-with-buttons 
+        [data]=openService.getResults 
+        [heading]=getObj.Header 
+        [keysFilter]=getObj.Filter 
+        [uniqueKey]=getObj.Unique
+        [expandColumn]=getObj.ExpandColumn
+        [expandKey]=getObj.ExpandKey
+        [expandHeading]=getObj.ExpandHeading
+        [buttons]=getObj.buttons></app-expandable-table-with-buttons>
+</div>
+<div class=row>
+    <app-expandable-table-with-buttons 
+        [data]=openService.searchResults 
+        [heading]=resultObj.Header 
+        [keysFilter]=resultObj.Filter 
+        [uniqueKey]=resultObj.Unique
+        [expandColumn]=resultObj.ExpandColumn
+        [expandKey]=resultObj.ExpandKey
+        [expandHeading]=resultObj.ExpandHeading></app-expandable-table-with-buttons>
+</div>
