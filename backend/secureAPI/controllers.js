@@ -74,6 +74,8 @@ function privateCourseTimetable(req, res){
         searchterm = [];
         if(result.length == 0)
             return res.send({"message": "No courseList by that name in your account"})
+        if(result.listData.length == 0)
+            return res.send({"message": "No courses in this courselist, add some courses to see data"});
         result[0].listData.forEach(element => {             //Iterate over the list to form a search document
             searchterm.push({ 
                 'subject':element.subject,
