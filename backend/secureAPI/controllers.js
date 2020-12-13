@@ -4,7 +4,7 @@ var Account = require('../models/account')
 var { checkSpecialChar } = require('../utilities/utilities')
 
 function createCourseList(req, res){
-    var { courseListName, listData, private } = req.body;
+    var { courseListName, listData, private, courseListDesc} = req.body;
     if( (!courseListName) || checkSpecialChar(courseListName))
         return res.status(400).send({"message":"Invalid data/empty : courseListName or listData"});
     if(req.user.course_list_count == 20)
@@ -29,6 +29,7 @@ function createCourseList(req, res){
             insertObj['courseListName']= courseListName;
             insertObj['creatorEmail']= req.user.email;
             insertObj['creatorName']=req.user.name;
+            insertObj['courseListDesc']=courseListDesc;
             CourseList.create(insertObj).then(result => {
                 req.user.course_list_count += 1;
                 Account.updateOne({email: req.user.email}, {course_list_count: req.user.course_list_count}).exec();

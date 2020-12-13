@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SecureService } from '../secure.service';
+import { OpenService } from '../open.service';
 
 @Component({
   selector: 'app-secure',
@@ -10,7 +11,9 @@ export class SecureComponent implements OnInit {
 
   subject: string;
   course: string;
-  keyword: string;
+  courseListName: string;
+  courseListDesc: string;
+  courseListPrivate: boolean;
 
   resultObj ={
     'Header': "RESULTS",
@@ -36,23 +39,23 @@ export class SecureComponent implements OnInit {
       'position': "main"
     }]}
 
-  constructor(public openService: OpenService) { }
+  constructor(public openService: OpenService, public secureService: SecureService) { }
 
   ngOnInit(): void {
     this.openService.searchResults=[];    //Empty any previous results
-    this.publicCourseList();
+    this.getCourseList();
   }
 
   mainSearch(): void {
     this.openService.mainSearch({subject:this.subject, course:this.course}).subscribe();
   }
 
-  keywordSearch(): void{
-    this.openService.keywordSearch(this.keyword).subscribe();
+  getCourseList(): void{
+    this.secureService.getCourseLists().subscribe();
   }
 
-  publicCourseList(): void{
-    this.openService.publicCourseLists().subscribe();
+  createCourseList(): void{
+    this.secureService.createCourseList(this.courseListName).subscribe();
   }
 
 }
