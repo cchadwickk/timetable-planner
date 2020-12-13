@@ -22,10 +22,10 @@ export class GuestTimetablesComponent implements OnInit {
     public openService: OpenService) { }
 
   ngOnInit(): void {
-    this.getCourseListName();
+    this.getTimetables();
   }
   
-  getCourseListName(): void {
+  getTimetables(): void {
     this.courseListName = String(this.route.snapshot.paramMap.get('courseListName'));
     this.tableObj.Header = "COURSE LIST: "+this.courseListName+" TIMETABLE";
     this.openService.courseListTimetables(this.courseListName).subscribe();

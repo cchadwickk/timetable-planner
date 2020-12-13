@@ -13,6 +13,7 @@ export class SecureService {
 
   private baseUrl = env.baseUrl+'/secure';
   public courseListResults: LooseObject[] = [];
+  public listTimetableResults: LooseObject[] = [];
 
   constructor(private http: HttpClient, private alertService: AlertService) { }
   
@@ -32,6 +33,17 @@ export class SecureService {
         this.courseListResults = res;
         console.log(res);
         this.alertService.add("CourseLists fetched");
+      })
+    );
+  }
+
+  getListTimetables(courseListName: string): Observable<LooseObject[]>{
+    let apiPath = this.baseUrl+'/courseListTimetables/'+courseListName;
+    return this.http.get<LooseObject[]>(apiPath, this.httpOptions).pipe(
+      tap(res => {
+        this.listTimetableResults = res;
+        console.log(res);
+        this.alertService.add("List timetables fetched");
       })
     );
   }

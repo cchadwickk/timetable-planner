@@ -1,0 +1,36 @@
+<br><br>
+<div class=row>
+    <div class=column>
+        <div class=contentbox>
+            <input pInputText [(ngModel)]="subject" placeholder="Subject"/>
+            <br>
+            <input pInputText [(ngModel)]="course" placeholder="Course"/>
+            <br>
+            <button pButton type="button" label="Search" (click)="mainSearch()"></button>
+        </div>
+    </div>
+    <app-expandable-table-with-buttons 
+        [data]=secureService.listTimetableResults 
+        [heading]=listObj.Header 
+        [keysFilter]=listObj.Filter 
+        [uniqueKey]=listObj.Unique
+        [buttons]=listObj.buttons
+        (actionEvent)=executeButtonAction($event)></app-expandable-table-with-buttons>
+</div>
+<div class=row>
+    <app-expandable-table-with-buttons 
+        [data]=openService.searchResults 
+        [heading]=resultObj.Header 
+        [keysFilter]=resultObj.Filter 
+        [uniqueKey]=resultObj.Unique
+        [expandColumn]=resultObj.ExpandColumn
+        [expandKey]=resultObj.ExpandKey
+        [expandHeading]=resultObj.ExpandHeading
+        [buttons]=resultObj.buttons
+        (actionEvent)=executeButtonAction($event)></app-expandable-table-with-buttons>
+</div>
+
+<!-- <p-dialog [header]="'Enter review for '+reviewInp.subject+' '+reviewInp.course" [(visible)]="reviewInp.visible">
+    <textarea pInputTextarea [(ngModel)]="reviewInp.content"></textarea><br>
+    <button pButton type="button" label="Submit" (click)="submitReview()"></button>
+</p-dialog> -->

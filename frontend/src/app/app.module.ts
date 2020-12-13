@@ -19,6 +19,7 @@ import { GuestComponent } from './guest/guest.component';
 import { ExpandableTableWithButtonsComponent } from './expandable-table-with-buttons/expandable-table-with-buttons.component';
 import { GuestTimetablesComponent } from './guest-timetables/guest-timetables.component';
 import { SecureComponent } from './secure/secure.component';
+import { CourseListComponent } from './course-list/course-list.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { SecureComponent } from './secure/secure.component';
     GuestComponent,
     ExpandableTableWithButtonsComponent,
     GuestTimetablesComponent,
-    SecureComponent
+    SecureComponent,
+    CourseListComponent
   ],
   imports: [
     BrowserModule,

@@ -2,15 +2,7 @@
 <div class=row>
     <div class=column>
         <div class=contentbox>
-            <input pInputText [(ngModel)]="subject" placeholder="Subject"/>
-            <br>
-            <input pInputText [(ngModel)]="course" placeholder="Course"/>
-            <br>
-            <button pButton type="button" label="Search" (click)="mainSearch()"></button>
-        </div>
-        <br>
-        <div class=contentbox>
-            Create New Course List
+            CREATE NEW COURSE LIST<br>
             <input pInputText [(ngModel)]="courseListName" placeholder="Course List Name"/>
             <br>
             <input pInputText [(ngModel)]="courseListDesc" placeholder="Description (Optional)"/>
@@ -22,6 +14,14 @@
             <br>
             <button pButton type="button" label="Create" (click)="createCourseList()"></button>
         </div>
+        <br>
+        <div class=contentbox>
+            <input pInputText [(ngModel)]="subject" placeholder="Subject"/>
+            <br>
+            <input pInputText [(ngModel)]="course" placeholder="Course"/>
+            <br>
+            <button pButton type="button" label="Search" (click)="mainSearch()"></button>
+        </div>
     </div>
     <app-expandable-table-with-buttons 
         [data]=secureService.courseListResults 
@@ -32,7 +32,8 @@
         [expandKey]=listObj.ExpandKey
         [expandHeading]=listObj.ExpandHeading
         [buttons]=listObj.buttons
-        (actionEvent)=executeButtonAction($event)></app-expandable-table-with-buttons>
+        (actionEvent)=executeButtonAction($event)>
+    </app-expandable-table-with-buttons>
 </div>
 <div class=row>
     <app-expandable-table-with-buttons 
@@ -44,7 +45,8 @@
         [expandKey]=resultObj.ExpandKey
         [expandHeading]=resultObj.ExpandHeading
         [buttons]=resultObj.buttons
-        (actionEvent)=executeButtonAction($event)></app-expandable-table-with-buttons>
+        (actionEvent)=executeButtonAction($event)>
+    </app-expandable-table-with-buttons>
 </div>
 <p-dialog [header]="'Enter review for '+reviewInp.subject+' '+reviewInp.course" [(visible)]="reviewInp.visible">
     <textarea pInputTextarea [(ngModel)]="reviewInp.content"></textarea><br>
