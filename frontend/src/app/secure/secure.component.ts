@@ -12,11 +12,11 @@ export class SecureComponent implements OnInit {
   subject: string;
   course: string;
   courseListName: string;
-  courseListDesc: string;
+  courseListDesc: string = "";
   courseListPrivate: boolean;
 
   resultObj ={
-    'Header': "RESULTS",
+    'Header': "COURSE SEARCH RESULT",
     'Filter': ['subject','catalog_nbr','className','class_section','ssr_component','start_time','end_time','days'],
     'Unique':"catalog_nbr",
     'ExpandHeading':"REVIEWS",
@@ -24,20 +24,21 @@ export class SecureComponent implements OnInit {
     'ExpandKey':"reviewDate"
   }
 
-  getObj ={    
-    'Header': "PUBLIC COURSE LISTS",
-    'Filter': ['courseListName','creatorName','lastUpdated','noOfCourses'],
+  listObj ={    
+    'Header': "YOUR COURSE LISTS",
+    'Filter': ['creatorName','lastUpdated','noOfCourses','private','courseListName'],
     'Unique':"courseListName",
     'ExpandHeading':"SUBJECT COURSE COMBINATIONS",
     'ExpandColumn':"listData",
-    'ExpandKey':"course",
-    'buttons':[{
-      'heading': "TIMETABLES",
-      'text': "Get",
-      'path': "/guest-timetables/|$courseListName",
-      'type': "router",
-      'position': "main"
-    }]}
+    'ExpandKey':"course"
+    // 'buttons':[{
+    //   'heading': "TIMETABLES",
+    //   'text': "Get",
+    //   'path': "/guest-timetables/|$courseListName",
+    //   'type': "router",
+    //   'position': "main"
+    // }]
+  }
 
   constructor(public openService: OpenService, public secureService: SecureService) { }
 
@@ -55,7 +56,7 @@ export class SecureComponent implements OnInit {
   }
 
   createCourseList(): void{
-    this.secureService.createCourseList(this.courseListName).subscribe();
+    this.secureService.createCourseList(this.courseListName, this.courseListPrivate, this.courseListDesc).subscribe();
   }
 
 }

@@ -5,31 +5,45 @@
             <label>Subject:
                 <input [(ngModel)]="subject" placeholder="Subject"/>
             </label>
+            <br>
             <label>Course:
                 <input [(ngModel)]="course" placeholder="Course"/>
             </label>
+            <br>
             <button (click)="mainSearch()" >
                 Search
             </button>
         </div>
+        <br>
         <div class=contentbox>
-            <label>Keyword:
-                    <input [(ngModel)]="keyword" placeholder="Keyword"/>
+            <label>Course List Name:
+                    <input [(ngModel)]="courseListName" placeholder="Course List Name"/>
             </label>
-            <button (click)="keywordSearch()">
+            <br>
+            <label>Course List Description:
+                <input [(ngModel)]="courseListDesc" placeholder="Description (Optional)"/>
+            </label>
+            <br>
+            <label>Private ?
+                <select [(ngModel)]="courseListPrivate">
+                    <option [value]="true" selected disabled hidden>true</option>
+                    <option [value]="false">false</option>
+                </select>
+            </label>
+            <br>
+            <button (click)="createCourseList()">
                 Search
             </button>
         </div>
     </div>
     <app-expandable-table-with-buttons 
-        [data]=openService.getResults 
-        [heading]=getObj.Header 
-        [keysFilter]=getObj.Filter 
-        [uniqueKey]=getObj.Unique
-        [expandColumn]=getObj.ExpandColumn
-        [expandKey]=getObj.ExpandKey
-        [expandHeading]=getObj.ExpandHeading
-        [buttons]=getObj.buttons></app-expandable-table-with-buttons>
+        [data]=secureService.courseListResults 
+        [heading]=listObj.Header 
+        [keysFilter]=listObj.Filter 
+        [uniqueKey]=listObj.Unique
+        [expandColumn]=listObj.ExpandColumn
+        [expandKey]=listObj.ExpandKey
+        [expandHeading]=listObj.ExpandHeading></app-expandable-table-with-buttons>
 </div>
 <div class=row>
     <app-expandable-table-with-buttons 

@@ -5,7 +5,6 @@ import { env } from '../environments/environment'
 import { tap } from 'rxjs/operators';
 import { LooseObject } from './object-template';
 import { AlertService } from './alert.service';
-import { EmailValidator } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
