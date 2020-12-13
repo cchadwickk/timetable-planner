@@ -44,9 +44,9 @@ export class AdminService {
     );
   }
 
-  updateReview(subject: string, course: string, email: string, visibility: boolean): Observable<LooseObject[]> {
+  updateReview(subject: string, course: string, email: string, visible: boolean): Observable<LooseObject[]> {
     const body = {
-      visibility: visibility,
+      visible: visible,
       subject: subject,
       email: email,
       course: course

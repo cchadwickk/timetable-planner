@@ -24,6 +24,7 @@ export class TopbarComponent implements OnInit {
   login(): void {
     this.authService.login(this.email, this.password).subscribe(res => {
       console.log("Logged in");
+      this.password="";
     },err=>  {
       if((err.error.message)&&(err.error.message.includes("Email not verified"))){
         let inp = confirm("Email has not been verfied. Resend verification email ?");
@@ -42,6 +43,7 @@ export class TopbarComponent implements OnInit {
   logout(): void {
     this.authService.logout().subscribe(res => {
       console.log("Logged out");
+      this.router.navigate(['/about']);
     })
   }
 }

@@ -57,14 +57,27 @@ export class ExpandableTableWithButtonsComponent implements OnInit {
 
   emitAction(rowData: LooseObject, buttonInfo: LooseObject, internalDataRow?: LooseObject): void{
     const temp = {
-      rowData: rowData,
+      rowData: JSON.parse(JSON.stringify(rowData)),
       buttonInfo: buttonInfo
     }
-    if(internalDataRow !== undefined){
+    if(internalDataRow !== undefined){                                      //If interal button, append data from internal row
       Object.entries(internalDataRow).forEach(
         ([key, value]) => {temp.rowData[key]=value;}
       );
     }
     this.actionEvent.next(temp);
+  }
+
+  generateLink(rowData: LooseObject, buttonInfo: LooseObject): string{      //Generate routerlinks
+    let temp = "";
+    let pathstring = buttonInfo.path;
+    let pathelements = pathstring.split('|');
+    pathelements.forEach(pathelement => {
+      if(pathelement[0] == '$')
+        temp += rowData[pathelement.slice(1)];
+      else
+        temp += pathelement;
+    });
+    return temp;
   }
 }

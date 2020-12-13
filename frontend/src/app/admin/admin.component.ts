@@ -65,17 +65,23 @@ export class AdminComponent implements OnInit {
 
   toggleAdmin(email: string, admin: boolean, active: boolean): void{
     admin = !admin;
-    this.adminService.updateUser(email, admin, active).subscribe();
+    this.adminService.updateUser(email, admin, active).subscribe(()=>{
+      window.location.reload();
+    });
   }
 
   toggleActive(email: string, admin: boolean, active: boolean): void{
     active = !active;
-    this.adminService.updateUser(email, admin, active).subscribe();
+    this.adminService.updateUser(email, admin, active).subscribe(()=>{
+      window.location.reload();
+    });
   }
 
   toggleReviewVis(subject: string, course: string, email: string, visibility: boolean): void{
     visibility = !visibility;
-    this.adminService.updateReview(subject, course, email, visibility).subscribe();
+    this.adminService.updateReview(subject, course, email, visibility).subscribe(()=>{
+      window.location.reload();
+    });
   }
 
   executeButtonAction(eventObj: LooseObject){
