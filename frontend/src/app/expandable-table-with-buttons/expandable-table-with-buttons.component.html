@@ -28,19 +28,19 @@
             <ng-template pTemplate="body" let-rowData let-expanded="expanded">
                 <tr>
                     <td *ngIf="remainingKeys().length || expandColumn!==undefined">
-                        <button type="button" pButton pRipple [pRowToggler]="rowData" class="p-button-text p-button-rounded p-button-plain">+</button>
+                        <button type="button" pButton pRipple [pRowToggler]="rowData" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                     </td>
                     <td *ngFor="let heads of filteredKeys()">
                         {{rowData[heads]}}
                     </td>
                     <ng-container *ngIf="getButtons('main','router').length">
                         <td *ngFor="let mainRouterButton of getButtons('main','router')">
-                            <button [routerLink]="generateLink(rowData, mainRouterButton)">{{ mainRouterButton.text }}</button>
+                            <button pButton type="button" [routerLink]="generateLink(rowData, mainRouterButton)" [label]="mainRouterButton.text"></button>
                         </td>
                     </ng-container>
                     <ng-container *ngIf="getButtons('main','action').length">
                         <td *ngFor="let mainActionButton of getButtons('main','action')">
-                            <button (click)="emitAction(rowData, mainActionButton)">{{ mainActionButton.text }}</button>
+                            <button pButton type="button" (click)="emitAction(rowData, mainActionButton)" [label]="mainActionButton.text"></button>
                         </td>
                     </ng-container>
                 </tr>
@@ -110,12 +110,12 @@
                                     </td>
                                     <ng-container *ngIf="getButtons('inside','router').length">
                                         <td *ngFor="let insideRouterButtons of getButtons('inside','router')">
-                                            <button [routerLink]="generateLink(internalDataRow, insideRouterButtons)">{{ insideRouterButtons.text }}</button>
+                                            <button pButton type="button" [routerLink]="generateLink(internalDataRow, insideRouterButtons)" [label]="insideRouterButtons.text"></button>
                                         </td>
                                     </ng-container>
                                     <ng-container *ngIf="getButtons('inside','action').length">
                                         <td *ngFor="let insideActionButtons of getButtons('inside','action')">
-                                            <button (click)="emitAction(rowData, insideActionButtons, internalDataRow)">{{ insideActionButtons.text }}</button>
+                                            <button pButton type="button" (click)="emitAction(rowData, insideActionButtons, internalDataRow)" [label]="insideRouterButtons.text"></button>
                                         </td>
                                     </ng-container>
                                 </tr>

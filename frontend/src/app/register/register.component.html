@@ -1,18 +1,16 @@
 <div class=contentbox>
     <br>
     <label>Email:
-        <input [(ngModel)]="email" placeholder="Email"/>
+        <input pInputText [(ngModel)]="email" placeholder="Email"/>
     </label>
     <br>
     <label>Password:
-        <input [(ngModel)]="password" placeholder="Password" type="password"/>
+        <input pInputText [(ngModel)]="password" placeholder="Password" type="password"/>
     </label>
     <br>
     <label>Name:
-            <input [(ngModel)]="name" placeholder="name"/>
+            <input pInputText [(ngModel)]="name" placeholder="name"/>
     </label>
     <br>
-    <button
-        (click)="register()" >Register
-    </button>
+    <button pButton type="button" label="Register" (click)="register()"></button>
 </div>

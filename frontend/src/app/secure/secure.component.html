@@ -2,38 +2,24 @@
 <div class=row>
     <div class=column>
         <div class=contentbox>
-            <label>Subject:
-                <input [(ngModel)]="subject" placeholder="Subject"/>
-            </label>
+            <input pInputText [(ngModel)]="subject" placeholder="Subject"/>
             <br>
-            <label>Course:
-                <input [(ngModel)]="course" placeholder="Course"/>
-            </label>
+            <input pInputText [(ngModel)]="course" placeholder="Course"/>
             <br>
-            <button (click)="mainSearch()" >
-                Search
-            </button>
+            <button pButton type="button" label="Search" (click)="mainSearch()"></button>
         </div>
         <br>
         <div class=contentbox>
-            <label>Course List Name:
-                    <input [(ngModel)]="courseListName" placeholder="Course List Name"/>
-            </label>
+            <input pInputText [(ngModel)]="courseListName" placeholder="Course List Name"/>
             <br>
-            <label>Course List Description:
-                <input [(ngModel)]="courseListDesc" placeholder="Description (Optional)"/>
-            </label>
+            <input pInputText [(ngModel)]="courseListDesc" placeholder="Description (Optional)"/>
             <br>
-            <label>Private ?
-                <select [(ngModel)]="courseListPrivate">
-                    <option [value]="true" selected>true</option>
-                    <option [value]="false">false</option>
-                </select>
-            </label>
+            <select [(ngModel)]="courseListPrivate">
+                <option [value]="true" selected>private</option>
+                <option [value]="false">public</option>
+            </select>
             <br>
-            <button (click)="createCourseList()">
-                Create
-            </button>
+            <button pButton type="button" label="Create" (click)="createCourseList()"></button>
         </div>
     </div>
     <app-expandable-table-with-buttons 
@@ -59,3 +45,7 @@
         [buttons]=resultObj.buttons
         (actionEvent)=executeButtonAction($event)></app-expandable-table-with-buttons>
 </div>
+<p-dialog [header]="'Enter review for '+reviewInp.subject+' '+reviewInp.course" [(visible)]="reviewInp.visible">
+    <textarea pInputTextarea [(ngModel)]="reviewInp.content"></textarea><br>
+    <button pButton type="button" label="Submit" (click)="submitReview()"></button>
+</p-dialog>

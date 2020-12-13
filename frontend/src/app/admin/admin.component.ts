@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../admin.service';
+import { AuthService } from '../auth.service';
 import { LooseObject } from '../object-template';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -46,9 +48,11 @@ export class AdminComponent implements OnInit {
     }]
   }
   
-  constructor(public adminService: AdminService) { }
+  constructor(public adminService: AdminService, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
+    if(this.authService.user==undefined || this.authService.user.admin==false)          //If the current user is not admin, then redirect       
+      this.router.navigate(['/about']);
     this.users();
     this.reviews();
     this.isDataAvailable = true;

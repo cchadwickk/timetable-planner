@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SecureService } from '../secure.service';
 import { OpenService } from '../open.service';
 import { LooseObject } from '../object-template';
+import { AuthService } from '../auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-secure',
@@ -15,6 +17,13 @@ export class SecureComponent implements OnInit {
   courseListName: string;
   courseListDesc: string = "";
   courseListPrivate: boolean;
+
+  reviewInp={
+    visible: false,
+    content: "",
+    subject: "",
+    course: ""
+  }
 
   resultObj ={
     'Header': "COURSE SEARCH RESULT",
@@ -54,11 +63,23 @@ export class SecureComponent implements OnInit {
     }]
   }
 
-  constructor(public openService: OpenService, public secureService: SecureService) { }
+  constructor(
+    private route: ActivatedRoute, 
+    public openService: OpenService, 
+    public secureService: SecureService, 
+    private authService: AuthService, 
+    private router: Router) { }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {  //If redirected from google, try to get profile data to confirm access
+      console.log(params['googleLogin']);
+      if(params['googleLogin']=='true')
+        this.authService.setProfile();
+    });
+    if(this.authService.loggedIn==false)      //If not logged in, redirect to about
+      this.router.navigate(['/about']);
     this.openService.searchResults=[];    //Empty any previous results
-    this.getCourseList();
+    this.getCourseList();                 //Get courselist data
   }
 
   mainSearch(): void {
@@ -77,6 +98,15 @@ export class SecureComponent implements OnInit {
 
   addReview(subject: string, course: string){
     console.log("Inside addReview");
+    this.reviewInp["course"]=course;
+    this.reviewInp["subject"]=subject;
+    this.reviewInp.visible=true;
+  }
+
+  submitReview(){
+    this.secureService.addReview(this.reviewInp.subject, this.reviewInp.course, this.reviewInp.content).subscribe(()=>{
+      window.location.reload();
+    })
   }
 
   delCourseList(courseListName: string){
@@ -99,7 +129,6 @@ export class SecureComponent implements OnInit {
         temp += pathelement;
     });
 
-    console.log("Evaluating: "+temp);
     eval(temp);
   }
 }

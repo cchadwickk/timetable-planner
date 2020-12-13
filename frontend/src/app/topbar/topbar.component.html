@@ -1,30 +1,20 @@
 <h1>{{title}}</h1>
-<button routerLink="/about">About</button>
-<button routerLink="/guest">Guest </button>
+<button pButton type="button" label="About" routerLink="/about"></button>
+<button pButton type="button" label="Guest" routerLink="/guest"></button>
 <span *ngIf="authService.loggedIn==true">
-    <button routerLink="/secure">Secure </button>
+    <button pButton type="button" label="Secure" routerLink="/secure"></button>
     <span *ngIf="authService.user.admin==true">
-        <button routerLink="/admin">Admin </button>
+        <button pButton type="button" label="Admin" routerLink="/admin"></button>
     </span>
 </span>
 <span *ngIf="authService.loggedIn==false" class="alignRight">
-    <label>Email:
-      <input [(ngModel)]="email" placeholder="Email"/>
-    </label>
-    <label>Password:
-        <input [(ngModel)]="password" placeholder="Password" type="password"/>
-    </label>
-    <button
-    (click)="login()" >Login
-    </button>
-    <button routerLink="/register">
-        Register
-    </button>
-    <input type="button" onclick="window.location.href='api/auth/google';" value="Google" />
+    <input pInputText [(ngModel)]="email" placeholder="Email"/>
+    <input pInputText [(ngModel)]="password" placeholder="Password" type="password"/>
+    <button pButton type="button" label="Login" (click)="login()"></button>
+    <button pButton type="button" label="Register" routerLink="/register"></button>
+    <button pButton type="button" label="Google" onclick="window.location.href='api/auth/google';"></button>
 </span>
 <span *ngIf="authService.loggedIn==true" class="alignRight">
     Hello {{authService.user.name}}
-    <button
-    (click)="logout()" >Logout
-    </button>
+    <button pButton type="button" label="Logout" (click)="logout()"></button>
 </span>

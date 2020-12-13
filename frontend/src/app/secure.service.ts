@@ -60,4 +60,20 @@ export class SecureService {
     );
   }
 
+  addReview(subject: string, course: string, content: string){
+    const body = {
+      subject: subject,
+      course: course,
+      reviewContent: content
+    };
+
+    let apiPath = this.baseUrl+'/courseReview';
+    return this.http.put<LooseObject[]>(apiPath, body, this.httpOptions).pipe(
+      tap(res => {
+        console.log(res);
+        this.alertService.add("Review posted successfully.");
+      })
+    );
+  }
+
 }

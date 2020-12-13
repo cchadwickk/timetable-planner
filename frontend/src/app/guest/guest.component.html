@@ -2,23 +2,13 @@
 <div class=row>
     <div class=column>
         <div class=contentbox>
-            <label>Subject:
-                <input [(ngModel)]="subject" placeholder="Subject"/>
-            </label>
-            <label>Course:
-                <input [(ngModel)]="course" placeholder="Course"/>
-            </label>
-            <button (click)="mainSearch()" >
-                Search
-            </button>
+            <input pInputText [(ngModel)]="subject" placeholder="Subject"/>
+            <input pInputText [(ngModel)]="course" placeholder="Course"/>
+            <button pButton type="button" label="Search" (click)="mainSearch()"></button>
         </div>
         <div class=contentbox>
-            <label>Keyword:
-                    <input [(ngModel)]="keyword" placeholder="Keyword"/>
-            </label>
-            <button (click)="keywordSearch()">
-                Search
-            </button>
+            <input pInputText [(ngModel)]="keyword" placeholder="Keyword"/>
+            <button pButton type="button" label="Search" (click)="keywordSearch()"></button>
         </div>
     </div>
     <app-expandable-table-with-buttons 

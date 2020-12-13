@@ -13,7 +13,7 @@ import { AlertService } from './alert.service';
 export class AuthService {
 
   private baseUrl = env.baseUrl+'/auth';
-  private user : LooseObject;
+  public user : LooseObject;
   public loggedIn: boolean;
 
   constructor(private http: HttpClient, private alertService: AlertService) { }
