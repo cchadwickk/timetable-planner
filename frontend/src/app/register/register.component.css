@@ -1,0 +1,7 @@
+.contentbox{                    /*wraps content and adds diff background for distinction*/
+    border-style: outset;
+    display: inline-block;
+    background-color: #2a9d8f;
+    padding: 10px;
+    margin: 10px;
+}
