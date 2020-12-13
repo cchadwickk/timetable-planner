@@ -25,7 +25,7 @@ export class CourseListComponent implements OnInit {
 
   listObj ={    
     'Header': "COURSE LIST TIMETABLE",
-    'Filter': ['subject','catalog_nbr'],
+    'Filter': ['subject','catalog_nbr','message'],
     'Unique':"catalog_nbr",
     'buttons':[{
       'heading': "-",
