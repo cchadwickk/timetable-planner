@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../admin.service';
+import { LooseObject } from '../object-template';
+import { EmailValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-admin',
@@ -17,14 +19,14 @@ export class AdminComponent implements OnInit {
     'buttons':[{
       'heading': "ADMIN",
       'text': "Toggle",
-      'path': "/guest-timetables/|$courseListName",
-      'type': "router",
+      'path': "this.toggleAdmin('|$email|',|$admin|,|$active|)",
+      'type': "action",
       'position': "main"
     },{
       'heading': "ACTIVE",
       'text': "Toggle",
-      'path': "/guest-timetables/|$courseListName",
-      'type': "router",
+      'path': "this.toggleActive('|$email|', |$admin|, |$active| )",
+      'type': "action",
       'position': "main"
     }]
   }
@@ -39,8 +41,8 @@ export class AdminComponent implements OnInit {
     'buttons':[{
       'heading': "VISIBILITY",
       'text': "Toggle",
-      'path': "/guest-timetables/|$courseListName",
-      'type': "router",
+      'path': "this.toggleReviewVis('|$subject|', '|$catalog_nbr|', '|$reviewerEmail|', |$visible| )",
+      'type': "action",
       'position': "inside"
     }]
   }
@@ -59,6 +61,38 @@ export class AdminComponent implements OnInit {
 
   users(): void{
     this.adminService.getUsers().subscribe();
+  }
+
+  toggleAdmin(email: string, admin: boolean, active: boolean): void{
+    admin = !admin;
+    this.adminService.updateUser(email, admin, active).subscribe();
+  }
+
+  toggleActive(email: string, admin: boolean, active: boolean): void{
+    active = !active;
+    this.adminService.updateUser(email, admin, active).subscribe();
+  }
+
+  toggleReviewVis(subject: string, course: string, email: string, visibility: boolean): void{
+    visibility = !visibility;
+    this.adminService.updateReview(subject, course, email, visibility).subscribe();
+  }
+
+  executeButtonAction(eventObj: LooseObject){
+    let {rowData, buttonInfo} = eventObj;
+    let temp = "";
+
+    let pathstring = buttonInfo.path;
+    let pathelements = pathstring.split('|');
+    pathelements.forEach(pathelement => {
+      if(pathelement[0] == '$')
+        temp += rowData[pathelement.slice(1)];
+      else
+        temp += pathelement;
+    });
+
+    console.log("Evaluating: "+temp);
+    eval(temp);
   }
 
 }

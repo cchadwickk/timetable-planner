@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { LooseObject } from '../object-template';
 
 @Component({
@@ -16,6 +16,7 @@ export class ExpandableTableWithButtonsComponent implements OnInit {
   @Input() expandHeading?: string;
   @Input() expandKey?: string;
   @Input() buttons?: LooseObject[] = [];
+  @Output() actionEvent? = new EventEmitter<LooseObject>(); //https://stackoverflow.com/questions/43323272/angular-4-call-parent-method-in-a-child-component
 
   constructor() { }
 
@@ -54,16 +55,16 @@ export class ExpandableTableWithButtonsComponent implements OnInit {
     return retButtons;
   }
 
-  generateLink(rowData: LooseObject, buttonInfo: LooseObject): string{
-    let temp = "";
-    let pathstring = buttonInfo.path;
-    let pathelements = pathstring.split('|');
-    pathelements.forEach(pathelement => {
-      if(pathelement[0] == '$')
-        temp += rowData[pathelement.slice(1)];
-      else
-        temp += pathelement;
-    });
-    return temp;
+  emitAction(rowData: LooseObject, buttonInfo: LooseObject, internalDataRow?: LooseObject): void{
+    const temp = {
+      rowData: rowData,
+      buttonInfo: buttonInfo
+    }
+    if(internalDataRow !== undefined){
+      Object.entries(internalDataRow).forEach(
+        ([key, value]) => {temp.rowData[key]=value;}
+      );
+    }
+    this.actionEvent.next(temp);
   }
 }

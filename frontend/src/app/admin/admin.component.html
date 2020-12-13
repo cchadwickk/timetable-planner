@@ -1,11 +1,12 @@
 <div class=row>
     <div class=column>
         <app-expandable-table-with-buttons 
-        [data]=adminService.adminResults 
+        [data]=adminService.userResults 
         [heading]=usersObj.Header 
         [keysFilter]=usersObj.Filter 
         [uniqueKey]=usersObj.Unique
-        [buttons]=usersObj.buttons></app-expandable-table-with-buttons>
+        [buttons]=usersObj.buttons
+        (actionEvent)=executeButtonAction($event)></app-expandable-table-with-buttons>
     </div>
     <div class=column>
         <app-expandable-table-with-buttons 
@@ -16,6 +17,7 @@
             [expandColumn]=reviewsObj.ExpandColumn
             [expandKey]=reviewsObj.ExpandKey
             [expandHeading]=reviewsObj.ExpandHeading
-            [buttons]=reviewsObj.buttons></app-expandable-table-with-buttons>
+            [buttons]=reviewsObj.buttons
+            (actionEvent)=executeButtonAction($event)></app-expandable-table-with-buttons>
     </div>
 </div>

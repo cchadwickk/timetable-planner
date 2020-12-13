@@ -14,7 +14,7 @@ export class AdminService {
 
   private baseUrl = env.baseUrl+'/admin';
   public reviewsResults: LooseObject[] = [];
-  public adminResults: LooseObject[] = [];
+  public userResults: LooseObject[] = [];
 
   constructor(private http: HttpClient, private alertService: AlertService) { }
   
@@ -37,7 +37,7 @@ export class AdminService {
     let apiPath = this.baseUrl+'/users';
     return this.http.get<LooseObject[]>(apiPath, this.httpOptions).pipe(
       tap(res => {
-        this.adminResults = res;
+        this.userResults = res;
         console.log(res);
         this.alertService.add("Users fetched");
       })
