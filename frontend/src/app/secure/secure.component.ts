@@ -49,6 +49,12 @@ export class SecureComponent implements OnInit {
     'ExpandColumn':"listData",
     'ExpandKey':"course",
     'buttons':[{
+      'heading': "PRIVACY",
+      'text': "TOGGLE",
+      'path': "this.toggleCourseListPrivacy('|$courseListName|')",
+      'type': "action",
+      'position': "main"
+    },{
       'heading': "-",
       'text': "DELETE",
       'path': "this.delCourseList('|$courseListName|' )",
@@ -90,9 +96,17 @@ export class SecureComponent implements OnInit {
     this.secureService.getCourseLists().subscribe();
   }
 
+  toggleCourseListPrivacy(courseListName: string){
+    let body = this.secureService.retCourseList(courseListName);
+    body.private=!body.private;
+    this.secureService.updateCourseList(body).subscribe(()=>{
+      this.getCourseList();
+    });
+  }
+
   createCourseList(): void{
     this.secureService.createCourseList(this.courseListName, this.courseListPrivate, this.courseListDesc).subscribe(()=>{
-      this.getCourseList();
+      this.router.navigate(['/courseList/'+this.courseListName]);
     });
   }
 

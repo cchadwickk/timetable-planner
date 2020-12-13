@@ -20,6 +20,11 @@ export class SecureService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  retCourseList(courseListName: string): LooseObject{
+    let retval = this.courseListResults.find(o => o.courseListName === courseListName);
+    return retval;
+  }
+
   getCourseLists(): Observable<LooseObject[]> {
     let apiPath = this.baseUrl+'/courseList';
     return this.http.get<LooseObject[]>(apiPath, this.httpOptions).pipe(
@@ -45,10 +50,21 @@ export class SecureService {
     return this.http.put<LooseObject[]>(apiPath, body, this.httpOptions).pipe(
       tap(res => {
         console.log(res);
-        this.alertService.add("Created courselist successfully.");
+        this.alertService.add(res['message']);
       })
     );
   }
+
+  updateCourseList(body: LooseObject){
+    let apiPath = this.baseUrl+'/courseList';
+    return this.http.put<LooseObject[]>(apiPath, body, this.httpOptions).pipe(
+      tap(res => {
+        console.log(res);
+        this.alertService.add(res['message']);
+      })
+    );
+  }
+
 
   delCourseList(courseListName: string): Observable<LooseObject[]> {
     let apiPath = this.baseUrl+'/courseList/'+courseListName;
