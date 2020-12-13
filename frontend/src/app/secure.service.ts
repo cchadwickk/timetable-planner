@@ -26,17 +26,13 @@ export class SecureService {
     return retval;
   }
 
-  getListDesc(courseListName: string): LooseObject{
-    if(this.courseListResults==[]){
-      this.getListTimetables(courseListName).subscribe(()=>{
-        let retval = this.courseListResults.find(o => o.courseListName === courseListName);
-        return retval.courseListDesc;
-      });
-    }
-    else{
-      let retval = this.courseListResults.find(o => o.courseListName === courseListName);
+  getListDesc(courseListName: string): string{
+    let retval = this.courseListResults.find(o => o.courseListName === courseListName);
+    if(!retval)
+      return "";
+    if(retval.courseListDesc)
       return retval.courseListDesc;
-    }
+    return "";
   }
 
   getCourseLists(): Observable<LooseObject[]> {

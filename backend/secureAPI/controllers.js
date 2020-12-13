@@ -79,7 +79,7 @@ function privateCourseTimetable(req, res){
         result[0].listData.forEach(element => {             //Iterate over the list to form a search document
             searchterm.push({ 
                 'subject':element.subject,
-                'catalog_nbr': element.course
+                'catalog_nbr': String(element.course)
             });
         });
         searchterm = { $or: searchterm };                   //Search mongo for documents that match

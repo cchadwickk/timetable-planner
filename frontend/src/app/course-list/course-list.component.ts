@@ -71,10 +71,22 @@ export class CourseListComponent implements OnInit {
     this.openService.searchResults=[];    //Empty any previous results 
     this.secureService.listTimetableResults=[]; 
     this.getTimetables();
+    this.getCourseList();
   }
 
   addCourse(subject: string, course: string){
-    console.log("Inside addCourse");
+    let body = this.secureService.courseListResults.find(o => o.courseListName === this.courseListName);
+    body.listData.forEach(element => {
+      if(element.subject==subject&&element.course==course){
+        window.prompt("ALREADY ADDED");
+        return;
+      }
+    });
+    body.listData.push({subject:subject, course: course});
+    this.secureService.updateCourseList(body).subscribe(()=>{
+      this.getTimetables();
+    });
+    console.log("Course added");
   }
 
   changeYear(subject: string, course: string){
@@ -82,7 +94,12 @@ export class CourseListComponent implements OnInit {
   }
 
   removeCourse(subject: string, course: string){
-    console.log("Inside removeCourse");
+    let body = this.secureService.courseListResults.find(o => o.courseListName === this.courseListName);  //Get body for courselistname
+    body.listData = body.listData.filter(obj => (obj.subject==subject && obj.course==course));            //remove course
+    this.secureService.updateCourseList(body).subscribe(()=>{
+      this.getTimetables();
+    });
+    console.log("Course removed");
   }
 
   mainSearch(): void {
@@ -97,6 +114,10 @@ export class CourseListComponent implements OnInit {
         this.listObj.Header += "\n\n No subject course combination yet. Search from left and add."
       }
     });
+  }
+
+  getCourseList(): void{
+    this.secureService.getCourseLists().subscribe();
   }
 
   executeButtonAction(eventObj: LooseObject){

@@ -10,7 +10,7 @@ var ListData = new Schema({
 var CourseList = new Schema({
     creatorEmail: {type: String},
     creatorName: {type: String},
-    courseListDesc: {type: String},
+    courseListDesc: {type: String, default: " "},
     courseListName: {type: String, unique: true},
     private: {type: Boolean, default: true},
     lastUpdated: {type: Date, default: Date.now},
