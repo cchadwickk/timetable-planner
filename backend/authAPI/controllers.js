@@ -51,7 +51,12 @@ function login(req, res) {
         req.logout();
         return res.status(401).send({'message':'Email not verified, cannot login'})
     }
-    res.send({'message':'Login Successful', 'name':req.user.name, 'email': req.user.email, 'admin': req.user.admin});
+    if(req.user.active==false){
+        req.logout();
+        res.status(401).send({'message':'Login Failed. Contact Administrator'});
+    }
+    else
+        res.send({'message':'Login Successful', 'name':req.user.name, 'email': req.user.email, 'admin': req.user.admin});
 }
 
 function getProfile(req, res) {

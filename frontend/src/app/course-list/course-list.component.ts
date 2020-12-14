@@ -18,7 +18,7 @@ export class CourseListComponent implements OnInit {
 
   yearInp={
     visible: false,
-    content: "",
+    content: 1,
     subject: "",
     course: ""
   }
@@ -34,9 +34,9 @@ export class CourseListComponent implements OnInit {
       'type': "action",
       'position': "main"
     },{
-      'heading': "YEAR",
-      'text': "EDIT",
-      'path': "this.changeYear('|$subject|', '|$catalog_nbr|')",
+      'heading': "EDIT YEAR",
+      'text': "CHANGE",
+      'path': "this.changeYear('|$subject|', '|$catalog_nbr|', '|$year|' )",
       'type': "action",
       'position': "main"
     }]
@@ -89,10 +89,6 @@ export class CourseListComponent implements OnInit {
     console.log("Course added");
   }
 
-  changeYear(subject: string, course: string){
-    console.log("Inside changeYear");
-  }
-
   removeCourse(subject: string, course: string){
     let body = this.secureService.courseListResults.find(o => o.courseListName === this.courseListName);  //Get body for courselistname
     body.listData = body.listData.filter(obj => (obj.subject!=subject || obj.course!=course));            //remove course
@@ -100,6 +96,27 @@ export class CourseListComponent implements OnInit {
       this.getTimetables();
     });
     console.log("Course removed");
+  }
+
+  changeYear(subject: string, course: string, year: number){
+    console.log("Inside addYear");
+    this.yearInp["course"]=course;
+    this.yearInp["subject"]=subject;
+    this.yearInp["content"]=year;
+    this.yearInp.visible=true;
+  }
+
+  submitYear(){
+    let body = this.secureService.courseListResults.find(o => o.courseListName === this.courseListName);  //Get body for courselistname
+    body.listData.forEach(element => {
+      if(element.subject==this.yearInp.subject&&element.course==this.yearInp.course)                      //Find course,subject combo
+        element.year=this.yearInp.content;                                                                //change year
+    });
+    this.secureService.updateCourseList(body).subscribe(()=>{                                             //update with new body
+      this.getTimetables();
+    });
+    console.log("Year updated");
+    this.yearInp.visible=false;
   }
 
   mainSearch(): void {

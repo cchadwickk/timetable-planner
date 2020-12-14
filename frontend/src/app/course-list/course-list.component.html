@@ -30,7 +30,14 @@
         (actionEvent)=executeButtonAction($event)></app-expandable-table-with-buttons>
 </div>
 
-<!-- <p-dialog [header]="'Enter review for '+reviewInp.subject+' '+reviewInp.course" [(visible)]="reviewInp.visible">
-    <textarea pInputTextarea [(ngModel)]="reviewInp.content"></textarea><br>
-    <button pButton type="button" label="Submit" (click)="submitReview()"></button>
-</p-dialog> -->
+<p-dialog [header]="'Enter year for '+yearInp.subject+' '+yearInp.course" [(visible)]="yearInp.visible">
+    <select [(ngModel)]="yearInp.content">
+        <option [value]=1 selected>1</option>
+        <option [value]=2>2</option>
+        <option [value]=3>3</option>
+        <option [value]=4>4</option>
+        <option [value]=5>5</option>
+        <option [value]=6>6</option>
+    </select><br>
+    <button pButton type="button" label="Submit" (click)="submitYear()"></button>
+</p-dialog>
