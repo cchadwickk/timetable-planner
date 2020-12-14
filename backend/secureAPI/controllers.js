@@ -64,7 +64,7 @@ function getCourseLists(req, res){
         for(let ind in resultCopy){
             resultCopy[ind]['noOfCourses']=resultCopy[ind].listData.length;
         };
-        res.send(result);
+        res.send(resultCopy);
     })
 }
 
@@ -103,7 +103,7 @@ function privateCourseTimetable(req, res){
 
 function addReview(req, res){
     var { subject, course, reviewContent } = req.body;
-    if( (!subject||!course||!reviewContent) || checkSpecialChar(subject) || checkSpecialChar(course) || checkSpecialChar(reviewContent))
+    if( (!subject||!course||!reviewContent) || checkSpecialChar(subject) || checkSpecialChar(course) )
         return res.status(400).send({"message":"Invalid data/empty : subject or course or reviewContent"});
     
     const {email, name} = req.user;
