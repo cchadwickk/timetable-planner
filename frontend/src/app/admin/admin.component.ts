@@ -41,7 +41,7 @@ export class AdminComponent implements OnInit {
     'ExpandKey':"reviewerEmail",
     'buttons':[{
       'heading': "VISIBILITY",
-      'text': "Toggle",
+      'text': "TOGGLE",
       'path': "this.toggleReviewVis('|$subject|', '|$catalog_nbr|', '|$reviewerEmail|', |$visible| )",
       'type': "action",
       'position': "inside"

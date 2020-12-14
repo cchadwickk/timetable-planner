@@ -25,6 +25,12 @@ export class SecureComponent implements OnInit {
     course: ""
   }
 
+  descInp={
+    visible: false,
+    content: "",
+    courseListName: ""
+  }
+
   resultObj ={
     'Header': "COURSE SEARCH RESULT",
     'Filter': ['subject','catalog_nbr','className','class_section','ssr_component','start_time','end_time','days'],
@@ -49,6 +55,12 @@ export class SecureComponent implements OnInit {
     'ExpandColumn':"listData",
     'ExpandKey':"course",
     'buttons':[{
+      'heading': "DESCRIPTION",
+      'text': "EDIT",
+      'path': "this.editDesc('|$courseListName|', '|$courseListDesc|')",
+      'type': "action",
+      'position': "main"
+    },{
       'heading': "PRIVACY",
       'text': "TOGGLE",
       'path': "this.toggleCourseListPrivacy('|$courseListName|')",
@@ -112,8 +124,20 @@ export class SecureComponent implements OnInit {
     });
   }
 
+  editDesc(courseListName: string, courseListDesc: string){
+    this.descInp["courseListName"]=courseListName;
+    this.descInp["content"]=courseListDesc
+    this.descInp.visible=true;
+  }
+
+  submitDesc(){
+    if(window.confirm("Submit description ?"))
+      this.secureService.changeDesc(this.descInp["courseListName"], this.descInp["content"]);
+    this.descInp.visible=false;
+    this.descInp.content="";
+  }
+
   addReview(subject: string, course: string){
-    console.log("Inside addReview");
     this.reviewInp["course"]=course;
     this.reviewInp["subject"]=subject;
     this.reviewInp.visible=true;

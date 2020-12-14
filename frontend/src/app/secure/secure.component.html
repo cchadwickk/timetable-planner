@@ -16,7 +16,7 @@
         </div>
         <br>
         <div class=contentbox>
-            SEARCH COURSES TO ADD OR REVIEW<br>
+            SEARCH COURSES TO REVIEW<br>
             <input pInputText [(ngModel)]="subject" placeholder="Subject"/>
             <br>
             <input pInputText [(ngModel)]="course" placeholder="Course"/>
@@ -52,4 +52,8 @@
 <p-dialog [header]="'Enter review for '+reviewInp.subject+' '+reviewInp.course" [(visible)]="reviewInp.visible">
     <textarea pInputTextarea [(ngModel)]="reviewInp.content"></textarea><br>
     <button pButton type="button" label="Submit" (click)="submitReview()"></button>
+</p-dialog>
+<p-dialog [header]="'Enter description for '+descInp.courseListName" [(visible)]="descInp.visible">
+    <textarea pInputTextarea [(ngModel)]="descInp.content"></textarea><br>
+    <button pButton type="button" label="Submit" (click)="submitDesc()"></button>
 </p-dialog>

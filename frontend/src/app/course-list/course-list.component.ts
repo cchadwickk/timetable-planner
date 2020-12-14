@@ -28,15 +28,15 @@ export class CourseListComponent implements OnInit {
     'Filter': ['subject','catalog_nbr','year'],
     'Unique':"catalog_nbr",
     'buttons':[{
-      'heading': "-",
-      'text': "REMOVE",
-      'path': "this.removeCourse('|$subject|', '|$catalog_nbr|')",
-      'type': "action",
-      'position': "main"
-    },{
       'heading': "EDIT YEAR",
       'text': "CHANGE",
       'path': "this.changeYear('|$subject|', '|$catalog_nbr|', '|$year|' )",
+      'type': "action",
+      'position': "main"
+    },{
+      'heading': "-",
+      'text': "REMOVE",
+      'path': "this.removeCourse('|$subject|', '|$catalog_nbr|')",
       'type': "action",
       'position': "main"
     }]

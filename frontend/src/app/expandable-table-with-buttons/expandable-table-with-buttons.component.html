@@ -122,7 +122,7 @@
                                     </ng-container>
                                     <ng-container *ngIf="getButtons('inside','action').length">
                                         <td *ngFor="let insideActionButtons of getButtons('inside','action')">
-                                            <button pButton type="button" (click)="emitAction(rowData, insideActionButtons, internalDataRow)" [label]="insideRouterButtons.text"></button>
+                                            <button pButton type="button" (click)="emitAction(rowData, insideActionButtons, internalDataRow)" [label]="insideActionButtons.text"></button>
                                         </td>
                                     </ng-container>
                                 </tr>

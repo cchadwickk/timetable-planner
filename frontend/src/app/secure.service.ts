@@ -115,4 +115,14 @@ export class SecureService {
     );
   }
 
+  changeDesc(courseListName: string, courseListDesc: string){
+    let body = this.courseListResults.find(o => o.courseListName === courseListName);
+    
+    body.courseListDesc=courseListDesc;
+    this.updateCourseList(body).subscribe(()=>{
+      this.getCourseLists();
+    });
+    this.alertService.add("Description posted successfully.");
+  }
+
 }
