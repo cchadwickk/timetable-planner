@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OpenService } from '../open.service';
+import { AlertService } from './alert.service';
 
 @Component({
   selector: 'app-guest',
@@ -37,7 +38,7 @@ export class GuestComponent implements OnInit {
       'position': "main"
     }]}
 
-  constructor(public openService: OpenService) { }
+  constructor(public openService: OpenService, private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.openService.searchResults=[];    //Empty any previous results
@@ -49,7 +50,13 @@ export class GuestComponent implements OnInit {
   }
 
   keywordSearch(): void{
-    this.openService.keywordSearch(this.keyword).subscribe();
+    if(this.keyword.length<4){
+      this.alertService.add("Minimum 4 characters required.");
+      return;
+    }
+    else{
+      this.openService.keywordSearch(this.keyword).subscribe();
+    }
   }
 
   publicCourseList(): void{
