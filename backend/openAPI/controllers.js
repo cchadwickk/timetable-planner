@@ -67,7 +67,11 @@ function publicCourseLists(req, res){
     }
     CourseList.find(searchterm, { _id:0, creatorEmail: 0, private: 0 } )
     .then( result => {
-        res.send(result);
+        resultCopy=JSON.parse(JSON.stringify(result));
+        for(let ind in resultCopy){
+            resultCopy[ind]['noOfCourses']=resultCopy[ind].listData.length;
+        };
+        res.send(resultCopy);
     });
 }
 

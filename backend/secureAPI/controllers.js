@@ -60,6 +60,10 @@ function getCourseLists(req, res){
     searchObj = { creatorEmail: req.user.email };
     projectionObj = { _id: 0, creatorEmail: 0, creatorName: 0 };
     CourseList.find(searchObj, projectionObj).then(result => {
+        resultCopy=JSON.parse(JSON.stringify(result));
+        for(let ind in resultCopy){
+            resultCopy[ind]['noOfCourses']=resultCopy[ind].listData.length;
+        };
         res.send(result);
     })
 }
