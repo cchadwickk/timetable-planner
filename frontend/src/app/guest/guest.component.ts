@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OpenService } from '../open.service';
-import { AlertService } from './alert.service';
+import { AlertService } from '../alert.service';
 
 @Component({
   selector: 'app-guest',

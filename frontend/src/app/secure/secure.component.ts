@@ -15,7 +15,7 @@ export class SecureComponent implements OnInit {
   subject: string;
   course: string;
   courseListName: string;
-  courseListDesc: string = " ";
+  courseListDesc: string = "";
   courseListPrivate: boolean;
 
   reviewInp={
@@ -43,7 +43,7 @@ export class SecureComponent implements OnInit {
 
   listObj ={    
     'Header': "YOUR COURSE LISTS",
-    'Filter': ['creatorName','lastUpdated','noOfCourses','private','courseListName','courseListDesc'],
+    'Filter': ['creatorName','noOfCourses','private','courseListName'],
     'Unique':"courseListName",
     'ExpandHeading':"SUBJECT COURSE COMBINATIONS",
     'ExpandColumn':"listData",
@@ -105,6 +105,8 @@ export class SecureComponent implements OnInit {
   }
 
   createCourseList(): void{
+    if(this.courseListDesc=="")
+      this.courseListDesc=" ";
     this.secureService.createCourseList(this.courseListName, this.courseListPrivate, this.courseListDesc).subscribe(()=>{
       this.router.navigate(['/courseList/'+this.courseListName]);
     });
@@ -118,9 +120,14 @@ export class SecureComponent implements OnInit {
   }
 
   submitReview(){
-    this.secureService.addReview(this.reviewInp.subject, this.reviewInp.course, this.reviewInp.content).subscribe(()=>{
-      window.location.reload();
-    })
+    if(window.confirm("Submit review ?"))
+      this.secureService.addReview(this.reviewInp.subject, this.reviewInp.course, this.reviewInp.content).subscribe(()=>{
+        window.location.reload();
+      })
+    else{
+      this.reviewInp.visible=false;
+      this.reviewInp.content="";
+    }
   }
 
   delCourseList(courseListName: string){
