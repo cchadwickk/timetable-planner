@@ -16,7 +16,7 @@ export class SecureComponent implements OnInit {
   course: string;
   courseListName: string;
   courseListDesc: string = "";
-  courseListPrivate: boolean;
+  courseListPrivate: boolean = true;
 
   reviewInp={
     visible: false,

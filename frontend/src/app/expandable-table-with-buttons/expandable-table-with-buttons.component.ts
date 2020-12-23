@@ -24,14 +24,7 @@ export class ExpandableTableWithButtonsComponent implements OnInit {
   }
 
   filteredKeys(): string[] {                  //Only select keys in data array, which are provided in keysFilter.
-    let retval: string[] = [];
-    if(!this.keysFilter)
-      return Object.keys(this.data[0]);
-    for( let item in this.data[0] ){
-      if(this.keysFilter.includes(item))
-        retval.unshift(item);
-    }
-    return retval;
+    return this.keysFilter;
   }
 
   remainingKeys(): string[]{

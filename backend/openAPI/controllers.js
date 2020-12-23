@@ -65,7 +65,7 @@ function publicCourseLists(req, res){
     searchterm = {
         private: false
     }
-    CourseList.find(searchterm, { _id:0, creatorEmail: 0, private: 0 } )
+    CourseList.find(searchterm, { _id:0, creatorEmail: 0, private: 0 } ).sort({lastUpdated: "desc"})
     .then( result => {
         resultCopy=JSON.parse(JSON.stringify(result));
         for(let ind in resultCopy){

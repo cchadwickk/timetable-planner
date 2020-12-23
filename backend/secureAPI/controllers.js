@@ -11,7 +11,7 @@ function createCourseList(req, res){
         return res.status(400).send({"message":"CourseLists limit reached, delete a courselist first"});
 
     searchObj = { courseListName: courseListName };
-    insertObj = { listData: listData };
+    insertObj = { listData: listData , lastUpdated:  $currentDate };
     if(private !== null)
         insertObj["private"] = private;
 
